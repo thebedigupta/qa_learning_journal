@@ -1,8 +1,0 @@
-# Ignore the heavy dependencies folder
-node_modules/
-
-# Usually ignored in personal projects to keep it clean
-package-lock.json
-
-# If you use a specific IDE like VS Code
-.vscode/
