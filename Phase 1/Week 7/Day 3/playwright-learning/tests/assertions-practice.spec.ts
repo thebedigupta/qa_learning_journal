@@ -59,7 +59,7 @@ test.describe('Saucedemo Login Assertions', () => {
         await page.locator('#password').fill('secret_sauce');
         await page.locator('#login-button').click();
         await expect(page).toHaveURL(/inventory/i);
-        const inventoryItems = page.locator('data-test=["inventory-item"]');
+        const inventoryItems = page.locator('.inventory_item');
         await expect(inventoryItems).toHaveCount(6);
     })
 });
