@@ -1,0 +1,5 @@
+# Ignore the heavy dependencies folder
+node_modules/
+
+# If you use a specific IDE like VS Code
+.vscode/
