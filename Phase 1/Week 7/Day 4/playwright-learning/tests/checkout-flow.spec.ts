@@ -27,6 +27,18 @@ test.describe("SauceDemo Complete Checkout flow", () => {
       await product.click();
     }
     await expect(page.locator(".shopping_cart_link > span")).toHaveText("6");
-
   })
+  test('sort products by price low to high',async({page})=>{
+    const sortDropdown = page.locator('.product_sort_container');
+    await sortDropdown.selectOption({label:'Price (low to high)'})
+    // In this command I am getting all the prices of the products from ascending order and storing them in an array
+    const inventoryPrice = await page.locator('.inventory_item_price').allInnerTexts();
+    // Take each value remove dollar sign and convert string into number
+    const priceArray = inventoryPrice.map(price => parseFloat(price.replace('$', '')));
+    // check is it in the ascending order or not
+    const checkValues = priceArray.every((price, index) => {
+      return index === 0 || price >= priceArray[index - 1];
+    });
+    expect(checkValues).toBeTruthy();
+    })
 });
