@@ -15,6 +15,18 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     // Product selection and adding to cart
     await page.locator(".inventory_list > .inventory_item").filter({ hasText: "Sauce Labs Backpack" }).getByRole("button", { name: "Add to cart" }).click();
     // Verify Cart Count
-    await expect(page.locator(".shopping_cart_link > span")).toHaveCount(1);
+    await expect(page.locator(".shopping_cart_link > span")).toHaveText("1");
   });
+
+  test('add multiple prducts and verify cart',async({page})=>{
+    // Add Multiple Products
+    const fetchProduct = page.locator('.inventory_list > .inventory_item');
+    const productCount = await fetchProduct.count();
+    for (let i = 0; i < productCount;i++){
+      const product = fetchProduct.nth(i).getByRole('button',{name: 'Add to cart'});
+      await product.click();
+    }
+    await expect(page.locator(".shopping_cart_link > span")).toHaveText("6");
+
+  })
 });
