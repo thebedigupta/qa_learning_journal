@@ -51,4 +51,16 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     });
     expect(checkValues).toBeTruthy();
   });
+  test("complete full checkout flow end to end", async ({ page }) => {
+    // You are on the right page
+    await expect(page.getByRole("heading", { name: "Products" })).toBeVisible();
+
+    // select one card from where we are going to buy
+    const cardOptions = page.locator(".inventory_list > .inventory_item");
+    const selectedItem = cardOptions.nth(1).getByRole("button", { name: "Add to cart" });
+    await selectedItem.click();
+
+    const cartBridge = page.locator('.shopping_cart_badge');
+    await expect(cartBridge).toHaveText('1');
+  });
 });
