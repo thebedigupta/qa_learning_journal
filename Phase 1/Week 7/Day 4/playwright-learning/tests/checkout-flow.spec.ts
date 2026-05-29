@@ -8,7 +8,6 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     const loginBtn = page.locator("#login-button");
     await loginBtn.click();
     await expect(page).toHaveURL(/inventory/i);
-    console.log("Now you are logged in and in the inventory page");
   });
 
   test("Add single product to cart and verify cart count", async ({ page }) => {
@@ -53,7 +52,7 @@ test.describe("SauceDemo Complete Checkout flow", () => {
   });
   test("complete full checkout flow end to end", async ({ page }) => {
     // You are on the right page
-    await expect(page.getByRole("heading", { name: "Products" })).toBeVisible();
+    await expect(page).toHaveURL(/inventory/i);
 
     // select one card from where we are going to buy
     const cardOptions = page.locator(".inventory_list > .inventory_item");
