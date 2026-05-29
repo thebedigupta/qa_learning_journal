@@ -1,6 +1,12 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
 
 test.describe('Saucedemo Login Assertions', () => {
+
+    async function login(page: Page, username = 'standard_user', password = 'secret_sauce') {
+        await page.locator('#user-name').fill(username);
+        await page.locator('#password').fill(password);
+        await page.locator('#login-button').click();
+    }
 
     test.beforeEach(async ({ page }) => {
         await page.goto('https://www.saucedemo.com/');
@@ -17,47 +23,33 @@ test.describe('Saucedemo Login Assertions', () => {
     });
 
     test('successful login redirects to inventory page', async ({ page }) => {
-        await page.locator('#user-name').fill('standard_user');
-        await page.locator('#password').fill('secret_sauce');
-        const loginBtn = page.locator('#login-button');
-        await expect(loginBtn).toBeVisible();
-        await loginBtn.click();
+        await login(page);
         await expect(page).toHaveURL(/inventory/);
     });
 
     // A negative test for invalid credentials is added in a follow-up commit.
     test('failed login shows error message for invalid credentials', async ({ page }) => {
-        await page.locator('#user-name').fill('standard_user');
-        await page.locator('#password').fill('wrong_password');
-        const loginBtn = page.locator('#login-button');
-        await loginBtn.click();
+        await login(page, 'standard_user', 'wrong_password');
         const errorShown = page.locator('h3[data-test="error"]');
         await expect(errorShown).toBeVisible();
         await expect(errorShown).toContainText('Epic sadface');
     });
 
     test('locked out user sees specific error message', async ({ page }) => {
-        await page.locator('#user-name').fill('locked_out_user');
-        await page.locator('#password').fill('secret_sauce');
-        const loginBtn = page.locator('#login-button');
-        await loginBtn.click();
+        await login(page, 'locked_out_user');
         const errorMessage = page.locator('h3[data-test="error"]');
         await expect(errorMessage).toBeVisible();
         await expect(errorMessage).toContainText('locked out');
     });
     test ('empty username shows validation error',async ({page}) => {
         await page.locator('#password').fill('secret_sauce');
-        const loginBtn = page.locator('#login-button');
-        await expect(loginBtn).toBeVisible();
-        await  loginBtn.click();
+        await page.locator('#login-button').click();
         const errorMessage = page.locator('h3[data-test="error"]');
         await expect(errorMessage).toBeVisible();
         await expect(errorMessage).toContainText('Epic sadface');
     }); 
     test('inventory page has correct page count',async({page})=>{
-        await page.locator('#user-name').fill('standard_user');
-        await page.locator('#password').fill('secret_sauce');
-        await page.locator('#login-button').click();
+        await login(page);
         await expect(page).toHaveURL(/inventory/i);
         const inventoryItems = page.locator('.inventory_item');
         await expect(inventoryItems).toHaveCount(6);
