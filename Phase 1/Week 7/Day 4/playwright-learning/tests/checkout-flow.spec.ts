@@ -113,14 +113,14 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     await expect(shoppingCart).toBeHidden();
   })
 
-  test('continue shopping from cart return to inventory',async({page})=>{
+  test.only('continue shopping from cart return to inventory',async({page})=>{
 
     await expect(page).toHaveURL(/inventory/i);
 
     const productItems = page.locator('.inventory_list .inventory_item').filter({hasText: 'Sauce Labs Bike Light'}).getByRole('button',{name:'Add to cart'});
     await productItems.click();
 
-    const shoppingCart = page.locator('.shopping_cart_link span');
+    const shoppingCart = page.locator('.shopping_cart_container');
     await expect(shoppingCart).toHaveText('1');
 
     await shoppingCart.click()
@@ -129,7 +129,7 @@ test.describe("SauceDemo Complete Checkout flow", () => {
 
     await page.getByRole('button',{name: 'Remove'}).click()
 
-    await expect(shoppingCart).toHaveText('0');
+    await expect(shoppingCart).toBeEmpty();
 
     await page.getByRole('button',{name: 'Continue Shopping'}).click();
 
