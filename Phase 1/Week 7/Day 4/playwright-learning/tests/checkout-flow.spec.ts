@@ -54,12 +54,21 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     // You are on the right page
     await expect(page).toHaveURL(/inventory/i);
 
-    // select one card from where we are going to buy
-    const cardOptions = page.locator(".inventory_list > .inventory_item");
-    const selectedItem = cardOptions.nth(1).getByRole("button", { name: "Add to cart" });
-    await selectedItem.click();
+    // We look for the product from it's name
+    const selectedProduct = page.locator('.inventory_list > .inventory_item').filter({hasText: 'Sauce Labs Backpack'});
 
+    //Extract the name of the product 
+    const productName = await selectedProduct.locator('.inventory_item_name').innerText();
+    
+    // After choosing product we are looking for Add to cart button
+    const addCart = selectedProduct.getByRole('button',{name : 'Add to cart'});
+    await addCart.click();
+
+    // Now we have to verify that we added one item in the cart but before that we have to target cart
     const cartBridge = page.locator('.shopping_cart_badge');
     await expect(cartBridge).toHaveText('1');
+
+    // Now verify whatever we choose is added in the cart 
+    await cartBridge.click();
   });
 });
