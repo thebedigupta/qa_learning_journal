@@ -70,5 +70,30 @@ test.describe("SauceDemo Complete Checkout flow", () => {
 
     // Now verify whatever we choose is added in the cart 
     await cartBridge.click();
+
+    // Product Name which is in the cart
+    const cartproductName = await page.locator('.cart_item .inventory_item_name').innerText();
+    
+
+    expect(productName).toBe(cartproductName);
+
+    // Look for checkout button
+    await page.getByRole('button',{name : 'Checkout'}).click();
+
+    // Look in the URL for this specified words
+    await expect(page).toHaveURL(/checkout-step-one/i);
+
+    // fill form for delivery
+    await page.getByPlaceholder('First Name').fill('Bedi');
+    await page.getByPlaceholder('Last Name').fill('Gupta');
+    await page.locator('[data-test="postalCode"]').pressSequentially('274001',{delay:100});
+    await page.getByRole('button',{name : 'Continue'}).click()
+
+    await expect(page).toHaveURL(/checkout-step-two/i);
+
+    await page.getByRole('button',{name:'Finish'}).click()
+
+    await expect(page.getByRole('heading',{name : 'Thank you for your order!'})).toBeVisible();
+
   });
 });
