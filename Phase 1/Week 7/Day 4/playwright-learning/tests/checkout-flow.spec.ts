@@ -96,7 +96,7 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     await expect(page.getByRole('heading',{name : 'Thank you for your order!'})).toBeVisible();
   });
 
-  test.only('remove product from cart',async ({page})=>{
+  test('remove product from cart',async ({page})=>{
 
     await expect(page).toHaveURL(/inventory/i);
 
@@ -111,5 +111,28 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     await page.getByRole('button',{name:'Remove'}).click();
 
     await expect(shoppingCart).toBeHidden();
+  })
+
+  test('continue shopping from cart return to inventory',async({page})=>{
+
+    await expect(page).toHaveURL(/inventory/i);
+
+    const productItems = page.locator('.inventory_list .inventory_item').filter({hasText: 'Sauce Labs Bike Light'}).getByRole('button',{name:'Add to cart'});
+    await productItems.click();
+
+    const shoppingCart = page.locator('.shopping_cart_link span');
+    await expect(shoppingCart).toHaveText('1');
+
+    await shoppingCart.click()
+
+    await expect(page).toHaveURL(/cart/i);
+
+    await page.getByRole('button',{name: 'Remove'}).click()
+
+    await expect(shoppingCart).toHaveText('0');
+
+    await page.getByRole('button',{name: 'Continue Shopping'}).click();
+
+    await expect(page).toHaveURL(/inventory/i);
   })
 });
