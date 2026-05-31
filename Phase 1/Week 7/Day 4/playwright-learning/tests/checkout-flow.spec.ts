@@ -113,7 +113,7 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     await expect(shoppingCart).toBeHidden();
   })
 
-  test.only('continue shopping from cart return to inventory',async({page})=>{
+  test('continue shopping from cart return to inventory',async({page})=>{
 
     await expect(page).toHaveURL(/inventory/i);
 
@@ -134,5 +134,28 @@ test.describe("SauceDemo Complete Checkout flow", () => {
     await page.getByRole('button',{name: 'Continue Shopping'}).click();
 
     await expect(page).toHaveURL(/inventory/i);
+  })
+
+  test('checkout fail with empty firstname',async({page})=>{
+
+    await expect(page).toHaveURL(/inventory/i);
+
+    const choosingProduct = page.locator('.inventory_list .inventory_item').filter({hasText: 'Sauce Labs Bike Light'}).getByRole('button',{name: 'Add to cart'})
+    await choosingProduct.click();
+
+    const shoppingCart = page.locator('.shopping_cart_container');
+    await expect(shoppingCart).toHaveText('1');
+    await shoppingCart.click();
+
+    const inventoryItem = page.locator('.cart_item .cart_quantity');
+    await expect(inventoryItem).toHaveText('1');
+
+    await page.getByRole('button',{name: 'Checkout'}).click();
+
+    await page.getByPlaceholder('First Name').fill('');
+    await page.getByPlaceholder('Last Name').fill('Gupta');
+    await page.getByPlaceholder('Zip/Postal Code').fill('274001');
+    await page.getByRole('button',{name:'Continue'}).click();
+    await expect(page.locator('[data-test="error"]')).toHaveText('Error: First Name is required') ;
   })
 });
