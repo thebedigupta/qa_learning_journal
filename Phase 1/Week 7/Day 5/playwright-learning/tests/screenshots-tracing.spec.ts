@@ -43,7 +43,14 @@ test.describe('Screenshot and Tracing Practice',()=>{
             path:'screenshot/04-Order-overview.png',
             fullPage: true,
         })
+        await page.getByRole('button',{name: 'Finish'}).click();
 
+        // Screenshot - Order Complete
+        await page.screenshot({
+            path: 'screenshot/05-order-complete.png',
+            fullPage : true
+        })
+        
         await expect(page.getByRole('heading',{name :'Thank you for your order!' })).toBeVisible();
     })
 })
