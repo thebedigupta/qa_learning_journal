@@ -53,4 +53,29 @@ test.describe('Screenshot and Tracing Practice',()=>{
         
         await expect(page.getByRole('heading',{name :'Thank you for your order!' })).toBeVisible();
     })
+    
 })
+
+test('take element screenshot of product card',async({page})=>{
+    await page.goto('https://saucedemo.com');
+    await page.getByPlaceholder('Username').fill('standard_user');
+    await page.getByPlaceholder('Password').fill('secret_sauce');
+    await page.getByRole('button',{name:'Login'}).click();
+
+    // First Product Card item
+    await page.locator('.inventory_item').first().screenshot({
+        path: 'screenshot/01-first-product.png',
+    })
+
+    await expect(page.locator('inventory_item').first()).toBeVisible();
+})
+
+//   test('snapshot test — login page visual regression', async ({ page }) => {
+//     await page.goto('https://www.saucedemo.com');
+
+//     // First run saves reference
+//     // Subsequent runs compare
+//     await expect(page).toHaveScreenshot('saucedemo-login.png', {
+//       maxDiffPixels: 200
+//     });
+//   });
