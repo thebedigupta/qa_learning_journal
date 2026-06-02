@@ -34,4 +34,20 @@ test.describe("Advanced element practice", () => {
     await page.getByRole('button',{name : 'Submit'}).click()
     await expect(page.locator('.contact-form .alert-success')).toBeVisible();
   })
+  test('MockAPI response and verify page uses mock data',async({page})=>{
+    await page.route('**/*.json',route =>{
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({mocked:true})
+      });
+    });
+
+    await page.goto('https://saucedemo.com')
+    await page.getByPlaceholder('Username').fill('standard_user');
+    await page.getByPlaceholder('Password').fill('secret_sauce');
+    await page.getByRole('button',{name: 'Login'}).click();
+
+    await expect(page.locator('.inventory_item')).toHaveCount(6);
+  });
 });
