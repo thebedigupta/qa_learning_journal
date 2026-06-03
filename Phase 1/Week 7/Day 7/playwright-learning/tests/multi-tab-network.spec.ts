@@ -39,4 +39,16 @@ test.describe("Multi-tab and network Interception", () => {
 
     await newPage.close();
   });
+  test("Mock product API and verify fallback behaviour", async ({ page }) => {
+    await page.route("**/*.{png,jpg,jpeg,gif}", (route) => route.abort());
+
+    await page.goto("https://saucedemo.com");
+    await page.getByPlaceholder("Username").fill("standard_user");
+    await page.getByPlaceholder("Password").fill("secret_sauce");
+    await page.getByRole("button", { name: "Login" }).click();
+
+    // Page still load without images
+    await expect(page.locator(".inventory_item")).toHaveCount(6);
+    await expect(page.locator("inventory_item_name").first()).toBeVisible();
+  });
 });
