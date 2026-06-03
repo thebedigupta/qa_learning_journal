@@ -52,16 +52,14 @@ test.describe("Multi-tab and network Interception", () => {
     // Name of the products is still visible
     await expect(page.locator(".inventory_item_name").first()).toBeVisible();
   });
-  test('Capture network requets during page load',async({page})=>{
+  test("Capture network requets during page load", async ({ page }) => {
+    const requests: string[] = [];
 
-    const requests : string[] = [];
+    page.on("request", (request) => {
+      requests.push(request.url());
+    });
 
-    page.on('request',request=>{
-        requests.push(request.url());
-    })
-
-    await page.goto('https://saucedemo.com');
-
+    await page.goto("https://saucedemo.com");
 
     // verify page loaded
     await expect(page).toHaveURL(/saucedemo/i);
@@ -71,5 +69,23 @@ test.describe("Multi-tab and network Interception", () => {
 
     // verify some requests were made
     expect(requests.length).toBeGreaterThan(0);
-  })
+  });
+  test("mock error response and verify page handle it", async ({ page }) => {
+    await page.goto("https://saucedemo.com");
+    await page.getByPlaceholder("Username").fill("standard_user");
+    await page.getByPlaceholder("Password").fill("secret_sauce");
+    await page.getByRole("button", { name: "Login" }).click();
+
+    await page.route("**/*.json", (route) => {
+      route.fulfill({
+        status: 503,
+        body: "Service Unavaliable",
+      });
+    });
+
+    await page.locator('.shopping_cart_link').click();
+    await expect(page).toHaveURL(/cart/);
+
+    await expect(page.getByRole('button',{name: 'Continue Shopping'})).toBeVisible()
+  });
 });
