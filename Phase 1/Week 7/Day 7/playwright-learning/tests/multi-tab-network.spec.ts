@@ -89,11 +89,13 @@ test.describe("Multi-tab and network Interception", () => {
     });
 
     // Click on the cart icon
-    await page.locator('.shopping_cart_link').click();
+    await page.locator(".shopping_cart_link").click();
 
     await expect(page).toHaveURL(/cart/);
 
     // after landing this page make sure continue shopping button visible
-    await expect(page.getByRole('button',{name: 'Continue Shopping'})).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Continue Shopping" }),
+    ).toBeVisible();
   });
 });
