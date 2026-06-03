@@ -1,0 +1,18 @@
+2026-06-03 00:38:41 - [32minfo[39m: Reading configs from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/browserstack.yml
+2026-06-03 00:38:41 - [32minfo[39m: Log Directory has been set to /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/log
+2026-06-03 00:38:41 - [32minfo[39m: Running SDK with args /home/thebedigupta/.nvm/versions/node/v26.1.0/bin/node /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/.bin/browserstack-node-sdk playwright test advanced-elements.spec.ts
+2026-06-03 00:38:41 - [32minfo[39m: SDK run started with id: 0d2a6b07-f09b-4042-8af0-246c899f67c2
+2026-06-03 00:38:41 - [32minfo[39m: Project and debug logs are captured by default. To disable, set disableAutoCaptureLogs: true in config.
+2026-06-03 00:38:44 - [32minfo[39m: [BrowserstackCLI] startMain: Starting main process
+2026-06-03 00:38:44 - [32minfo[39m: [CLIUtils] Current CLI Path Found: 
+2026-06-03 00:39:01 - [32minfo[39m: [BrowserstackCLI] stop: CLI is not running, skipping stop
+2026-06-03 00:39:01 - [31merror[39m: The "sdk:cleanup-start" performance mark has not been set
+2026-06-03 00:40:38 - [32minfo[39m: Reading configs from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/browserstack.yml
+2026-06-03 00:40:38 - [32minfo[39m: Log Directory has been set to /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/log
+2026-06-03 00:40:38 - [32minfo[39m: Running SDK with args /home/thebedigupta/.nvm/versions/node/v26.1.0/bin/node /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/.bin/browserstack-node-sdk playwright test advanced-elements.spec.ts
+2026-06-03 00:40:38 - [32minfo[39m: SDK run started with id: 4a485f92-6055-4208-b362-005823f62149
+2026-06-03 00:40:38 - [32minfo[39m: Project and debug logs are captured by default. To disable, set disableAutoCaptureLogs: true in config.
+2026-06-03 00:40:39 - [32minfo[39m: [BrowserstackCLI] startMain: Starting main process
+2026-06-03 00:40:39 - [32minfo[39m: [CLIUtils] Current CLI Path Found: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299
+2026-06-03 00:40:51 - [32minfo[39m: [BrowserstackCLI] stop: CLI is not running, skipping stop
+2026-06-03 00:40:51 - [31merror[39m: The "sdk:cleanup-start" performance mark has not been set

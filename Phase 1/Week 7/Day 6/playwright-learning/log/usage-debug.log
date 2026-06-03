@@ -1,0 +1,136 @@
+2026-06-03 00:27:35 - [34mdebug[39m: Could not locate npm module path with error  Cannot access 'isYarnPnP' before initialization
+2026-06-03 00:38:41 - [34mdebug[39m: Could not locate npm module path with error  Cannot access 'isYarnPnP' before initialization
+2026-06-03 00:38:41 - [32minfo[39m: Log Directory has been set to /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/log
+2026-06-03 00:38:41 - [32minfo[39m: Reading configs from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/browserstack.yml
+2026-06-03 00:38:41 - [32minfo[39m: Running SDK with args /home/thebedigupta/.nvm/versions/node/v26.1.0/bin/node /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/.bin/browserstack-node-sdk playwright test advanced-elements.spec.ts
+2026-06-03 00:38:41 - [32minfo[39m: SDK run started with id: 0d2a6b07-f09b-4042-8af0-246c899f67c2
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV3 :: module - @playwright/test/package.json, package - @playwright/test
+2026-06-03 00:38:41 - [34mdebug[39m: Resolved from resolveModuleV3 :: Path - /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/@playwright/test/package.json
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV3 :: module - selenium-webdriver/package.json, package - selenium-webdriver
+2026-06-03 00:38:41 - [34mdebug[39m: Unable to resolve module with requireModuleV3 with error: Error: Cannot find module 'selenium-webdriver'
+Require stack:
+- /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/helper.js
+- /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/bin/runner.js
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV2 :: module - selenium-webdriver/package.json, package - selenium-webdriver
+2026-06-03 00:38:41 - [34mdebug[39m: Getting selenium-webdriver/package.json from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: selenium-webdriver/package.json doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: Getting selenium-webdriver/package.json from null
+2026-06-03 00:38:41 - [34mdebug[39m: Error while loading package. Error: selenium-webdriver/package.json doesn't exist.
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV3 :: module - playwright/lib/transform/transform.js, package - playwright
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV2 :: module - playwright/lib/transform/transform.js, package - playwright
+2026-06-03 00:38:41 - [34mdebug[39m: Getting playwright/lib/transform/transform.js from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: playwright/lib/transform/transform.js doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: Getting playwright/lib/transform/transform.js from null
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV3 :: module - @playwright/test/node_modules/playwright/lib/transform/transform.js, package - @playwright/test
+2026-06-03 00:38:41 - [34mdebug[39m: requireModuleV2 :: module - @playwright/test/node_modules/playwright/lib/transform/transform.js, package - @playwright/test
+2026-06-03 00:38:41 - [34mdebug[39m: Getting @playwright/test/node_modules/playwright/lib/transform/transform.js from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: @playwright/test/node_modules/playwright/lib/transform/transform.js doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:38:41 - [34mdebug[39m: Getting @playwright/test/node_modules/playwright/lib/transform/transform.js from null
+2026-06-03 00:38:41 - [34mdebug[39m: Error in getting framework version to : Error: playwright/lib/transform/transform.js doesn't exist.
+2026-06-03 00:38:41 - [34mdebug[39m: Firing SDK event for funnel data: {"userName":"[REDACTED]","accessKey":"[REDACTED]","event_type":"SDKTestAttempted","detectedFramework":"Playwright","optimalHubUrl":[],"event_properties":{"testhub_uuid":"","sdkRunId":"0d2a6b07-f09b-4042-8af0-246c899f67c2","product_map":{"observability":true,"accessibility":false,"percy":false,"automate":true,"app_automate":false,"lts":false,"central_scanner":false,"lcnc":false},"productMap":{"observability":true,"accessibility":false,"percy":false,"automate":true,"app_automate":false,"lts":false,"central_scanner":false,"lcnc":false},"language_framework":"unknown","referrer":"Playwright-nodeagent/1.55.5","frameworkVersion":"1.60.0","automationFramework":"selenium","automationFrameworkVersion":null,"language":"nodejs","languageVersion":"v26.1.0","product":["automate","observability"],"buildName":"advanced-elements-day21","buildIdentifier":"#1","os":"Linux","hostname":"thebedigupta","isCLIEnabled":false}}
+2026-06-03 00:38:41 - [32minfo[39m: Project and debug logs are captured by default. To disable, set disableAutoCaptureLogs: true in config.
+2026-06-03 00:38:41 - [34mdebug[39m: Sending request to https://api.browserstack.com/sdk/v1/event
+2026-06-03 00:38:41 - [34mdebug[39m: Sending request to https://hub.browserstack.com/next_hubs
+2026-06-03 00:38:43 - [34mdebug[39m: Response from https://hub.browserstack.com/next_hubs: 200 OK
+2026-06-03 00:38:43 - [34mdebug[39m: Response: {"hubs":["hub-aps.browserstack.com","hub-euw.browserstack.com","hub-apse.browserstack.com"]}
+2026-06-03 00:38:43 - [34mdebug[39m: NEAREST HUBS LIST: ["hub-aps.browserstack.com","hub-euw.browserstack.com","hub-apse.browserstack.com"]
+2026-06-03 00:38:43 - [34mdebug[39m: Sending request to https://hub-aps.browserstack.com/check
+2026-06-03 00:38:43 - [34mdebug[39m: Sending request to https://hub-euw.browserstack.com/check
+2026-06-03 00:38:43 - [34mdebug[39m: Sending request to https://hub-apse.browserstack.com/check
+2026-06-03 00:38:44 - [34mdebug[39m: Response from https://hub-aps.browserstack.com/check: 200 OK
+2026-06-03 00:38:44 - [34mdebug[39m: Execution time for https://hub-aps.browserstack.com is: 1130ms
+2026-06-03 00:38:44 - [34mdebug[39m: HUB URL SET TO - https://hub-aps.browserstack.com
+2026-06-03 00:38:44 - [32minfo[39m: [BrowserstackCLI] startMain: Starting main process
+2026-06-03 00:38:44 - [34mdebug[39m: [BrowserstackCLI] Setting up CLI binary path...
+2026-06-03 00:38:44 - [34mdebug[39m: [CLIUtils] Configuring Cli path.
+2026-06-03 00:38:44 - [34mdebug[39m: [CLIUtils] Folder /home/thebedigupta/.browserstack already exists
+2026-06-03 00:38:44 - [32minfo[39m: [CLIUtils] Current CLI Path Found: 
+2026-06-03 00:38:44 - [34mdebug[39m: Sending request to https://api.browserstack.com/sdk/v1/update_cli
+2026-06-03 00:38:44 - [34mdebug[39m: Response from https://api.browserstack.com/sdk/v1/event: 200 OK
+2026-06-03 00:38:44 - [34mdebug[39m: API Event SDKTestAttempted response - {"data":{"message":"SDK Event recorded successfully"},"body":"{\"message\":\"SDK Event recorded successfully\"}","statusCode":200}
+2026-06-03 00:38:44 - [34mdebug[39m: Response from https://hub-euw.browserstack.com/check: 200 OK
+2026-06-03 00:38:44 - [34mdebug[39m: Execution time for https://hub-euw.browserstack.com is: 1746ms
+2026-06-03 00:38:44 - [34mdebug[39m: Response from https://hub-apse.browserstack.com/check: 200 OK
+2026-06-03 00:38:44 - [34mdebug[39m: Execution time for https://hub-apse.browserstack.com is: 1764ms
+2026-06-03 00:38:45 - [34mdebug[39m: Response from https://api.browserstack.com/sdk/v1/update_cli: 200 OK
+2026-06-03 00:38:45 - [34mdebug[39m: [CLIUtils] response {"data":{"success":true,"current_cli_version":"0","updated_cli_version":"1.34.5","url":"https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip"},"body":"{\"success\":true,\"current_cli_version\":\"0\",\"updated_cli_version\":\"1.34.5\",\"url\":\"https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip\"}","statusCode":200}
+2026-06-03 00:38:45 - [34mdebug[39m: [CLIUtils] Need to update binary, current binary version: 0
+2026-06-03 00:38:45 - [34mdebug[39m: [CLIUtils] Downloading SDK binary from: https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip
+2026-06-03 00:39:01 - [34mdebug[39m: Calling Build Stop from ExitHandler
+2026-06-03 00:39:01 - [32minfo[39m: [BrowserstackCLI] stop: CLI is not running, skipping stop
+2026-06-03 00:39:01 - [31merror[39m: The "sdk:cleanup-start" performance mark has not been set
+2026-06-03 00:39:01 - [34mdebug[39m: DOMException [SyntaxError]: The "sdk:cleanup-start" performance mark has not been set
+    at getMark (node:internal/perf/usertiming:65:11)
+    at calculateStartDuration (node:internal/perf/usertiming:212:13)
+    at measure (node:internal/perf/usertiming:230:7)
+    at Performance.measure (node:internal/perf/performance:134:12)
+    at PerformanceTester.end (/home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/performance/performance-tester.js:1:20861)
+    at process.<anonymous> (/home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/BrowserStackSetup.js:1:22271)
+2026-06-03 00:40:38 - [34mdebug[39m: Could not locate npm module path with error  Cannot access 'isYarnPnP' before initialization
+2026-06-03 00:40:38 - [32minfo[39m: Log Directory has been set to /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/log
+2026-06-03 00:40:38 - [32minfo[39m: Reading configs from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/browserstack.yml
+2026-06-03 00:40:38 - [32minfo[39m: Running SDK with args /home/thebedigupta/.nvm/versions/node/v26.1.0/bin/node /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/.bin/browserstack-node-sdk playwright test advanced-elements.spec.ts
+2026-06-03 00:40:38 - [32minfo[39m: SDK run started with id: 4a485f92-6055-4208-b362-005823f62149
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV3 :: module - @playwright/test/package.json, package - @playwright/test
+2026-06-03 00:40:38 - [34mdebug[39m: Resolved from resolveModuleV3 :: Path - /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/@playwright/test/package.json
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV3 :: module - selenium-webdriver/package.json, package - selenium-webdriver
+2026-06-03 00:40:38 - [34mdebug[39m: Unable to resolve module with requireModuleV3 with error: Error: Cannot find module 'selenium-webdriver'
+Require stack:
+- /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/helper.js
+- /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/bin/runner.js
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV2 :: module - selenium-webdriver/package.json, package - selenium-webdriver
+2026-06-03 00:40:38 - [34mdebug[39m: Getting selenium-webdriver/package.json from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: selenium-webdriver/package.json doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: Getting selenium-webdriver/package.json from null
+2026-06-03 00:40:38 - [34mdebug[39m: Error while loading package. Error: selenium-webdriver/package.json doesn't exist.
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV3 :: module - playwright/lib/transform/transform.js, package - playwright
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV2 :: module - playwright/lib/transform/transform.js, package - playwright
+2026-06-03 00:40:38 - [34mdebug[39m: Getting playwright/lib/transform/transform.js from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: playwright/lib/transform/transform.js doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: Getting playwright/lib/transform/transform.js from null
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV3 :: module - @playwright/test/node_modules/playwright/lib/transform/transform.js, package - @playwright/test
+2026-06-03 00:40:38 - [34mdebug[39m: requireModuleV2 :: module - @playwright/test/node_modules/playwright/lib/transform/transform.js, package - @playwright/test
+2026-06-03 00:40:38 - [34mdebug[39m: Getting @playwright/test/node_modules/playwright/lib/transform/transform.js from /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: @playwright/test/node_modules/playwright/lib/transform/transform.js doesn't exist at /home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning
+2026-06-03 00:40:38 - [34mdebug[39m: Getting @playwright/test/node_modules/playwright/lib/transform/transform.js from null
+2026-06-03 00:40:38 - [34mdebug[39m: Error in getting framework version to : Error: playwright/lib/transform/transform.js doesn't exist.
+2026-06-03 00:40:38 - [34mdebug[39m: Firing SDK event for funnel data: {"userName":"[REDACTED]","accessKey":"[REDACTED]","event_type":"SDKTestAttempted","detectedFramework":"Playwright","optimalHubUrl":[],"event_properties":{"testhub_uuid":"","sdkRunId":"4a485f92-6055-4208-b362-005823f62149","product_map":{"observability":true,"accessibility":false,"percy":false,"automate":true,"app_automate":false,"lts":false,"central_scanner":false,"lcnc":false},"productMap":{"observability":true,"accessibility":false,"percy":false,"automate":true,"app_automate":false,"lts":false,"central_scanner":false,"lcnc":false},"language_framework":"unknown","referrer":"Playwright-nodeagent/1.55.5","frameworkVersion":"1.60.0","automationFramework":"selenium","automationFrameworkVersion":null,"language":"nodejs","languageVersion":"v26.1.0","product":["automate","observability"],"buildName":"advanced-elements-day21","buildIdentifier":"#2","os":"Linux","hostname":"thebedigupta","isCLIEnabled":false}}
+2026-06-03 00:40:38 - [32minfo[39m: Project and debug logs are captured by default. To disable, set disableAutoCaptureLogs: true in config.
+2026-06-03 00:40:38 - [34mdebug[39m: Sending request to https://api.browserstack.com/sdk/v1/event
+2026-06-03 00:40:38 - [34mdebug[39m: Sending request to https://hub.browserstack.com/next_hubs
+2026-06-03 00:40:38 - [34mdebug[39m: Response from https://hub.browserstack.com/next_hubs: 200 OK
+2026-06-03 00:40:38 - [34mdebug[39m: Response: {"hubs":["hub-aps.browserstack.com","hub-euw.browserstack.com","hub-apse.browserstack.com"]}
+2026-06-03 00:40:38 - [34mdebug[39m: NEAREST HUBS LIST: ["hub-aps.browserstack.com","hub-euw.browserstack.com","hub-apse.browserstack.com"]
+2026-06-03 00:40:38 - [34mdebug[39m: Sending request to https://hub-aps.browserstack.com/check
+2026-06-03 00:40:38 - [34mdebug[39m: Sending request to https://hub-euw.browserstack.com/check
+2026-06-03 00:40:38 - [34mdebug[39m: Sending request to https://hub-apse.browserstack.com/check
+2026-06-03 00:40:39 - [34mdebug[39m: Response from https://hub-aps.browserstack.com/check: 200 OK
+2026-06-03 00:40:39 - [34mdebug[39m: Execution time for https://hub-aps.browserstack.com is: 404ms
+2026-06-03 00:40:39 - [34mdebug[39m: HUB URL SET TO - https://hub-aps.browserstack.com
+2026-06-03 00:40:39 - [32minfo[39m: [BrowserstackCLI] startMain: Starting main process
+2026-06-03 00:40:39 - [34mdebug[39m: [BrowserstackCLI] Setting up CLI binary path...
+2026-06-03 00:40:39 - [34mdebug[39m: [CLIUtils] Configuring Cli path.
+2026-06-03 00:40:39 - [34mdebug[39m: [CLIUtils] Folder /home/thebedigupta/.browserstack already exists
+2026-06-03 00:40:39 - [32minfo[39m: [CLIUtils] Current CLI Path Found: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299
+2026-06-03 00:40:39 - [34mdebug[39m: [CLIUtils] CLI version found despite error: "/bin/sh: line 1: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299: Permission denied"
+2026-06-03 00:40:39 - [34mdebug[39m: Sending request to https://api.browserstack.com/sdk/v1/update_cli
+2026-06-03 00:40:39 - [34mdebug[39m: Response from https://api.browserstack.com/sdk/v1/event: 200 OK
+2026-06-03 00:40:39 - [34mdebug[39m: API Event SDKTestAttempted response - {"data":{"message":"SDK Event recorded successfully"},"body":"{\"message\":\"SDK Event recorded successfully\"}","statusCode":200}
+2026-06-03 00:40:40 - [34mdebug[39m: Response from https://hub-apse.browserstack.com/check: 200 OK
+2026-06-03 00:40:40 - [34mdebug[39m: Execution time for https://hub-apse.browserstack.com is: 1071ms
+2026-06-03 00:40:40 - [34mdebug[39m: Response from https://api.browserstack.com/sdk/v1/update_cli: 200 OK
+2026-06-03 00:40:40 - [34mdebug[39m: [CLIUtils] response {"data":{"success":true,"current_cli_version":"/bin/sh: line 1: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299: Permission denied","updated_cli_version":"1.34.5","url":"https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip"},"body":"{\"success\":true,\"current_cli_version\":\"/bin/sh: line 1: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299: Permission denied\",\"updated_cli_version\":\"1.34.5\",\"url\":\"https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip\"}","statusCode":200}
+2026-06-03 00:40:40 - [34mdebug[39m: [CLIUtils] Need to update binary, current binary version: /bin/sh: line 1: /home/thebedigupta/.browserstack/cli/binary-linuxstatic-x64.tmp.12299: Permission denied
+2026-06-03 00:40:40 - [34mdebug[39m: [CLIUtils] Downloading SDK binary from: https://sdk-assets.browserstack.com/binary-linux-x64-1.34.5.zip
+2026-06-03 00:40:42 - [34mdebug[39m: Response from https://hub-euw.browserstack.com/check: 200 OK
+2026-06-03 00:40:42 - [34mdebug[39m: Execution time for https://hub-euw.browserstack.com is: 3688ms
+2026-06-03 00:40:51 - [34mdebug[39m: Calling Build Stop from ExitHandler
+2026-06-03 00:40:51 - [32minfo[39m: [BrowserstackCLI] stop: CLI is not running, skipping stop
+2026-06-03 00:40:51 - [31merror[39m: The "sdk:cleanup-start" performance mark has not been set
+2026-06-03 00:40:51 - [34mdebug[39m: DOMException [SyntaxError]: The "sdk:cleanup-start" performance mark has not been set
+    at getMark (node:internal/perf/usertiming:65:11)
+    at calculateStartDuration (node:internal/perf/usertiming:212:13)
+    at measure (node:internal/perf/usertiming:230:7)
+    at Performance.measure (node:internal/perf/performance:134:12)
+    at PerformanceTester.end (/home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/performance/performance-tester.js:1:20861)
+    at process.<anonymous> (/home/thebedigupta/Desktop/code/qa_learning_journal/Phase 1/Week 7/Day 6/playwright-learning/node_modules/browserstack-node-sdk/src/helpers/BrowserStackSetup.js:1:22271)
