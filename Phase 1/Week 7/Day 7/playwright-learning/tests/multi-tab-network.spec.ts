@@ -40,6 +40,7 @@ test.describe("Multi-tab and network Interception", () => {
     await newPage.close();
   });
   test("Mock product API and verify fallback behaviour", async ({ page }) => {
+    // Mocking route before hitting server (images not loaded)
     await page.route("**/*.{png,jpg,jpeg,gif}", (route) => route.abort());
 
     await page.goto("https://saucedemo.com");
@@ -53,8 +54,10 @@ test.describe("Multi-tab and network Interception", () => {
     await expect(page.locator(".inventory_item_name").first()).toBeVisible();
   });
   test("Capture network requets during page load", async ({ page }) => {
+    // Array to store request urls (only strings to keep it simple)
     const requests: string[] = [];
 
+    // Capture request and store url in array
     page.on("request", (request) => {
       requests.push(request.url());
     });
@@ -71,11 +74,13 @@ test.describe("Multi-tab and network Interception", () => {
     expect(requests.length).toBeGreaterThan(0);
   });
   test("mock error response and verify page handle it", async ({ page }) => {
+    // login with credentials and land on inventory page
     await page.goto("https://saucedemo.com");
     await page.getByPlaceholder("Username").fill("standard_user");
     await page.getByPlaceholder("Password").fill("secret_sauce");
     await page.getByRole("button", { name: "Login" }).click();
 
+    // Mocking route before hitting server
     await page.route("**/*.json", (route) => {
       route.fulfill({
         status: 503,
@@ -83,9 +88,12 @@ test.describe("Multi-tab and network Interception", () => {
       });
     });
 
+    // Click on the cart icon
     await page.locator('.shopping_cart_link').click();
+
     await expect(page).toHaveURL(/cart/);
 
-    await expect(page.getByRole('button',{name: 'Continue Shopping'})).toBeVisible()
+    // after landing this page make sure continue shopping button visible
+    await expect(page.getByRole('button',{name: 'Continue Shopping'})).toBeVisible();
   });
 });
