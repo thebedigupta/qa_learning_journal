@@ -49,6 +49,27 @@ test.describe("Multi-tab and network Interception", () => {
 
     // Page still load without images
     await expect(page.locator(".inventory_item")).toHaveCount(6);
-    await expect(page.locator("inventory_item_name").first()).toBeVisible();
+    // Name of the products is still visible
+    await expect(page.locator(".inventory_item_name").first()).toBeVisible();
   });
+  test('Capture network requets during page load',async({page})=>{
+
+    const requests : string[] = [];
+
+    page.on('request',request=>{
+        requests.push(request.url());
+    })
+
+    await page.goto('https://saucedemo.com');
+
+
+    // verify page loaded
+    await expect(page).toHaveURL(/saucedemo/i);
+
+    // count number of requests made during page load
+    console.log(`Request Made :${requests.length}`);
+
+    // verify some requests were made
+    expect(requests.length).toBeGreaterThan(0);
+  })
 });
