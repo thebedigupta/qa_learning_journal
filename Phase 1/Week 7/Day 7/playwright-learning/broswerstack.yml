@@ -1,0 +1,18 @@
+userName: thebedigupta_HKfO6l
+accessKey: xymvHiqcKxPrqiST9MPX
+
+browsers:
+  - browser: safari
+    browser_version: latest
+    os: OS X
+    os_version: Ventura
+
+platforms:
+  - deviceName: iPhone 13
+    osVersion: 15
+    browserName: Safari
+
+projectName: qa-learning-journal
+buildName: advanced-elements-day21
+
+parallelsPerPlatform: 1
