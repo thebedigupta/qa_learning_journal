@@ -23,4 +23,20 @@ test.describe("Multi-tab and network Interception", () => {
     //Verify original page still correct
     await expect(page).toHaveURL(/inventory/i);
   });
+  test("open new tab in same context share session", async ({ page }) => {
+    // first login to saucedemo
+    await page.goto("https://saucedemo.com");
+    await page.getByPlaceholder("Username").fill("standard_user");
+    await page.getByPlaceholder("Password").fill("secret_sauce");
+    await page.getByRole("button", { name: "Login" }).click();
+    await expect(page).toHaveURL(/inventory/i);
+
+    // Open new tab in the same context
+    const newPage = await page.context().newPage();
+    await newPage.goto("https://www.saucedemo.com/inventory.html");
+
+    await expect(newPage.locator(".inventory_item")).toHaveCount(6);
+
+    await newPage.close();
+  });
 });
