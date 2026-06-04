@@ -1,9 +1,11 @@
 {
   "name": "qa-learning-journal",
   "version": "1.0.0",
-  "description": "",
-  "private": true,
+  "description": "QA Learning Journal",
   "scripts": {
-    "test": "echo \"No tests yet\""
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest"
   }
 }
