@@ -3,8 +3,8 @@ import { Page } from "@playwright/test";
 export class BasePage {
   constructor(protected page: Page) {}
 
-  async await() {
-    await this.page.goto("/");
+  async goto(path: string = '/') {
+    await this.page.goto(path);
   }
 
   async waitForPageLoad(){
