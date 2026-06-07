@@ -1,8 +1,7 @@
 import { Page, expect } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-import { LoginPage } from "./LoginPage";
-
-export class ProductPage extends LoginPage {
+export class ProductPage extends BasePage {
   private readonly pageTitle = this.page.locator(".title");
   private readonly cartIcon = this.page.locator('.inventory_cart_link');
   private readonly cartBadge = this.page.locator(
@@ -16,7 +15,7 @@ export class ProductPage extends LoginPage {
   }
 
   async goto() {
-    await this.page.goto("/inventory.html");
+    await super.goto('/inventory.html');
   }
 
   async addToCartButton(productName: string) {
