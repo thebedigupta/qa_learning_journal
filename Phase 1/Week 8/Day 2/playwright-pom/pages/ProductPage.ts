@@ -4,15 +4,12 @@ import { LoginPage } from "./LoginPage";
 
 export class ProductPage extends LoginPage {
   private readonly pageTitle = this.page.locator(".title");
-  private readonly cartIcon = this.page.locator(
-    'data-test=".shopping_cart_link"',
-  );
+  private readonly cartIcon = this.page.locator('.inventory_cart_link');
   private readonly cartBadge = this.page.locator(
-    'data-test=".shopping_cart_badge"',
+    '.shopping_cart_badge'
   );
   private readonly inventoryList = this.page.locator(
-    'data-test=".inventory_item"',
-  );
+    '.inventory_item');  
 
   constructor(page: Page) {
     super(page);
