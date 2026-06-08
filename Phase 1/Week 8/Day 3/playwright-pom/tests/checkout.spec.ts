@@ -41,6 +41,8 @@ test('User Completes full checkout flow sucessfully',async({page})=>{
     await checkoutPage.fillShippingInfo(checkoutInfo.firstName,checkoutInfo.lastName,checkoutInfo.zip);
     await checkoutPage.assertOnCheckoutStepTwo();
     await checkoutPage.finishOrder();
+
+    // Assert Order Completed
     await checkoutPage.assertOrderStatus();
 
 })
