@@ -2,20 +2,12 @@ import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class CartPage extends BasePage {
-  private readonly cartButton = this.page.locator(
-    '[data-test=".inventory_item_link"]',
-  );
-  private readonly shoppingBadge = this.page.locator(
-    '[data-test="shopping-cart-badge"]',
-  );
   private readonly eachItemRow = this.page.locator(
     '[data-test="inventory-item"]',
   );
-  private readonly inventoryItemName = this.page.locator(
-    '[data-test="inventory-item-name"]',
-  );
   private readonly continueShoppingBtn = this.page.locator(
     '[data-test="continue-shopping"]',
+
   );
   private readonly checkoutButton = this.page.locator('[data-test="checkout"]');
 
@@ -24,11 +16,11 @@ export class CartPage extends BasePage {
   }
 
   async goto() {
-    await super.goto("/inventory.html");
+    await super.goto("/cart.html");
   }
 
   async proceedToCheckout() {
-    await this.cartButton.click();
+    await this.checkoutButton.click();
   }
 
   async continueShopping() {
@@ -46,13 +38,18 @@ export class CartPage extends BasePage {
   // ----------- Assertion ----------------
 
   // Assert correct number of items in cart
-  async assertItemCount() {
-    await this.shoppingBadge.count();
+  async assertItemCount(expectedCount : number) {
+    await expect(this.eachItemRow).toHaveCount(expectedCount);
+  }
+
+  // Assert cart shows zero items
+  async assertCartIsEmpty(){
+    await expect(this.eachItemRow).toHaveCount(0);
   }
 
   // Assertion Specific product name is visible in the cart
   async assertItemInCart(expectedName : string){
-    await expect(this.inventoryItemName.filter({ hasText: expectedName })).toBeVisible();
+    await expect(this.eachItemRow.filter({ hasText: expectedName })).toBeVisible();
   }
 
   // Assertion checkout button is visible (we are on the cart page)
