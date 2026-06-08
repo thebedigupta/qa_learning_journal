@@ -1,5 +1,5 @@
 username,password,expectedError
 ,secret_sauce,Username is required
 standard_user,,Password is required
-locked_out_user,secret_sauce,Sorry, this user has been locked out
+locked_out_user,secret_sauce,this user has been locked out
 invalid_user,invalid_pass,Username and password do not match
