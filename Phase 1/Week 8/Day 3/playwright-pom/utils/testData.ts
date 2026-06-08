@@ -19,3 +19,9 @@ export const products = {
   bikeLight: 'Sauce Labs Bike Light',
   tshirt: 'Sauce Labs Bolt T-Shirt'
 };
+
+export const checkoutInfo = {
+  firstName: 'Bedi',
+  lastName:  'Gupta',
+  zip:       '221001'
+};
