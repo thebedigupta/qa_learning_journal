@@ -38,22 +38,22 @@ export class CartPage extends BasePage {
   // ----------- Assertion ----------------
 
   // Assert correct number of items in cart
-  async assertItemCount(expectedCount : number) {
-    await expect(this.eachItemRow).toHaveCount(expectedCount);
+  async assertItemCount(expectedCount : number) :Promise <void>{
+    await expect(this.eachItemRow,'Item count is incorrect').toHaveCount(expectedCount);
   }
 
   // Assert cart shows zero items
-  async assertCartIsEmpty(){
-    await expect(this.eachItemRow).toHaveCount(0);
+  async assertCartIsEmpty():Promise <void>{
+    await expect(this.eachItemRow,'Cart is empty').toHaveCount(0);
   }
 
   // Assertion Specific product name is visible in the cart
-  async assertItemInCart(expectedName : string){
-    await expect(this.eachItemRow.filter({ hasText: expectedName })).toBeVisible();
+  async assertItemInCart(expectedName : string):Promise <void>{
+    await expect(this.eachItemRow.filter({ hasText: expectedName }),'Specific name of the product is visible in the cart').toBeVisible();
   }
 
   // Assertion checkout button is visible (we are on the cart page)
-  async assertOnCartPage(){
-    await expect(this.checkoutButton).toBeVisible();
+  async assertOnCartPage():Promise <void>{
+    await expect(this.checkoutButton,`Checkout button is visible`).toBeVisible();
   }
 }

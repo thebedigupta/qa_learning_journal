@@ -26,21 +26,21 @@ export class LoginPage extends BasePage {
 
   // ----------- Assertions ------------
 
-  async assertLoginSucess() {
-    await expect(this.page).toHaveURL("/inventory.html");
+  async assertLoginSucess():Promise <void> {
+    await expect(this.page,'Login failed - URL should contain /inventory.html').toHaveURL("/inventory.html");
   }
 
-  async assertErrorMessage(expectedMessage: string) {
-    await expect(this.errorMessage).toBeVisible();
-    await expect(this.errorMessage).toContainText(expectedMessage);
+  async assertErrorMessage(expectedMessage: string) :Promise <void>{
+    await expect(this.errorMessage,'Error banner should be visible').toBeVisible();
+    await expect(this.errorMessage,`Error should contain ${expectedMessage}`).toContainText(expectedMessage);
   }
 
-  async assertLoginPage() {
-    await expect(this.loginButton).toBeVisible();
+  async assertLoginPage() :Promise <void>{
+    await expect(this.loginButton, `Login button should be visible - user is on login page`).toBeVisible();
   }
 
   // Add this method to LoginPage.ts
-  async assertErrorVisible() {
-    await expect(this.errorMessage).toBeVisible();
+  async assertErrorVisible() :Promise <void>{
+    await expect(this.errorMessage,`Error should be vsisble`).toBeVisible();
   }
 }

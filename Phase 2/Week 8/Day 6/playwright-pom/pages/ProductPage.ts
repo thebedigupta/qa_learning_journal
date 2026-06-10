@@ -42,19 +42,19 @@ export class ProductPage extends BasePage {
     await this.cartBridge.click();
   }
 
-  async assertOnProductPage(){
-    await expect(this.page).toHaveURL('/inventory.html');
+  async assertOnProductPage():Promise <void>{
+    await expect(this.page,'Login failed - URL should contain /inventory.html').toHaveURL('/inventory.html');
   }
 
-  async cartCount(productNumber:number){
-    await expect(this.cartBridge).toHaveText(String(productNumber));
+  async cartCount(productNumber:number):Promise <void>{
+    await expect(this.cartBridge,'Cart count is incorrect').toHaveText(String(productNumber));
   }
 
-  async assertCartIsEmpty(){
-    await expect(this.cartBridge).toBeHidden();
+  async assertCartIsEmpty():Promise <void>{
+    await expect(this.cartBridge,'Cart is not empty').toBeHidden();
   }
 
-  async ProductIsVisible(expectedName:string){
+  async ProductIsVisible(expectedName:string):Promise <void>{
     await expect(this.inventoryItem.filter({hasText: expectedName})).toBeVisible();
   }
 

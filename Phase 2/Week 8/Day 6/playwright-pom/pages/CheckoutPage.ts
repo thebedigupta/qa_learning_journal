@@ -49,27 +49,27 @@ export class CheckoutPage extends BasePage {
 
   // Assert we landed on Step 1 (form is visible)
   async OnCheckoutStepOne() {
-    await expect(this.firsNameInput).toBeVisible();
+    await expect(this.firsNameInput,'First Name Input Field is visible on step 1').toBeVisible();
   }
 
   // Assert we landed on step 2(Order Summary)
 
-  async assertOnCheckoutStepTwo() {
-    await expect(this.checkoutOverview).toContainText(/Overview/i);
+  async assertOnCheckoutStepTwo():Promise <void> {
+    await expect(this.checkoutOverview,' Address form is visible').toContainText(/Overview/i);
   }
   // Assert Order was placed sucessfully
-  async assertOrderStatus() {
-    await expect(this.checkoutOverview).toContainText(/Complete!/i);
+  async assertOrderStatus() :Promise <void>{
+    await expect(this.checkoutOverview,'Order sucessfully Placed').toContainText(/Complete!/i);
   }
 
   // Assert error shown when required field is missing
-  async asserFormError(expectedText: string) {
-    await expect(this.errorShown).toBeVisible();
-    await expect(this.errorShown).toContainText(expectedText);
+  async asserFormError(expectedText: string) :Promise <void>{
+    await expect(this.errorShown,`Error should be visible`).toBeVisible();
+    await expect(this.errorShown,`Error should be visible which contain ${expectedText}`).toContainText(expectedText);
   }
 
   // Assert the item total label is visible (we're on overview screen)
-  async assertItemTotalVisible() {
-    await expect(this.summaryLabel).toBeVisible();
+  async assertItemTotalVisible():Promise <void> {
+    await expect(this.summaryLabel,'We should be on overview screen').toBeVisible();
   }
 }
