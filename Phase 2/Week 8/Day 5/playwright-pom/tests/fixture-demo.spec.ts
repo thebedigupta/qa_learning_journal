@@ -16,6 +16,6 @@ test('@regression cart has correct item after adding',async({cartPage})=>{
     await cartPage.assertItemInCart(products.backpack);
 })
 
-test('@regression checkout form is visible at step one',async({checkoutPage})=>{
+test('@regression ficheckout form is visible at step one',async({checkoutPage})=>{
     await checkoutPage.OnCheckoutStepOne();
 })
