@@ -24,10 +24,8 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
-    - name: Install system dependencies
-      run: sudo apt-get update && sudo apt-get install -y libicu74 libjpeg-turbo8 gstreamer1.0-libav
-    - name: Install Playwright Browsers
-      run: npx playwright install
+    - name: Install Playwright Browsers and Dependencies
+      run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
