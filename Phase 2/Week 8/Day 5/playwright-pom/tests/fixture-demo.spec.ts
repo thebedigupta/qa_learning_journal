@@ -1,4 +1,4 @@
-import {test,expect} from '../fixtures/customFixtures';
+import {test, expect} from '../fixtures/customFixtures';
 import {users,products} from '../utils/testData';
 
 test('@smoke add backlight to cart',async({loggedInPage})=>{

@@ -1,4 +1,7 @@
 # js-automation-toolkit
+A status badge for the test workflow:
+
+[![Tests](https://github.com/thebedigupta/qa_learning_journal/actions/workflows/tests.yml/badge.svg)](https://github.com/thebedigupta/qa_learning_journal/actions/workflows/tests.yml)
 
 A modular, scalable end-to-end testing and automation framework. This repository contains the core utilities, type-safe architecture, and Playwright execution suite built to ensure high software reliability across UI and API layers.
 
