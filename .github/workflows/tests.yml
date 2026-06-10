@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: 'Phase 2/Week 8/Day 5/playwright-pom'
+        working-directory: 'Phase 2/Week 8/Day 6/playwright-pom'
         
     steps:
       - uses: actions/checkout@v4
@@ -34,5 +34,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
-          path: 'Phase 2/Week 8/Day 5/playwright-pom/playwright-report/'
+          path: 'Phase 2/Week 8/Day 6/playwright-pom/playwright-report/'
           retention-days: 30
