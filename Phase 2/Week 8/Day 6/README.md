@@ -1,10 +1,25 @@
 # Playwright POM Framework
 
-# Badges
+## Status
 
 [![Playwright Tests](https://github.com/thebedigupta/playwright-pom-framework/actions/workflows/playwright.yml/badge.svg)](https://github.com/thebedigupta/playwright-pom-framework/actions/workflows/playwright.yml) [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org) [![Playwright](https://img.shields.io/badge/Playwright-latest-green)](https://playwright.dev) [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
-A production-ready end-to-end test automation framework built with **Playwright** and **TypeScript**. The project demonstrates SDET patterns such as the Page Object Model (POM), data-driven testing (DDT), custom fixtures, parallel cross-browser execution, and CI via GitHub Actions.
+A production-ready end-to-end test automation framework built with **Playwright** and **TypeScript**.
+
+This project demonstrates practical SDET patterns such as the Page Object Model (POM), data-driven testing (DDT), custom fixtures, parallel cross-browser execution, and CI via GitHub Actions.
+
+## Quick Links
+
+- [Tech Stack](#tech-stack)
+- [Framework Architecture](#framework-architecture)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Running Tests](#running-tests)
+- [Test Suite Overview](#test-suite-overview)
+- [Design Patterns](#design-patterns)
+- [CI/CD](#cicd)
+- [Target Application](#target-application)
+- [Author](#author)
 
 ---
 
@@ -24,34 +39,34 @@ A production-ready end-to-end test automation framework built with **Playwright*
 ┌──────────────────────────────────────────────────────────┐
 │                      TEST LAYER                          │
 │   login.spec  shopping.spec  checkout.spec  ddt-*.spec   │
-│   Pure test logic — no raw selectors, no setup code       │
+│   Pure test logic — no raw selectors, no setup code      │
 └─────────────────────────┬────────────────────────────────┘
 │ uses
 ┌─────────────────────────▼────────────────────────────────┐
 │                    FIXTURE LAYER                         │
 │              fixtures/customFixtures.ts                  │
 │        loggedInPage │ cartPage │ checkoutPage            │
-│   Handles authentication setup once — injected into tests│
+│   Handles authentication setup once — injected into tests │
 └─────────────────────────┬────────────────────────────────┘
 │ instantiates
 ┌─────────────────────────▼────────────────────────────────┐
 │                 PAGE OBJECT LAYER                        │
-│   BasePage → LoginPage → ProductsPage                    │
-│            CartPage → CheckoutPage                       │
-│   Each class: private locators + public action methods   │
+│   BasePage → LoginPage → ProductsPage                     │
+│            CartPage → CheckoutPage                        │
+│   Each class: private locators + public action methods    │
 └─────────────────────────┬────────────────────────────────┘
 │ reads from
 ┌─────────────────────────▼────────────────────────────────┐
 │                    DATA LAYER                            │
-│   utils/testData.ts        — users, products, checkoutInfo│
-│   utils/loginData.json     — DDT login credentials       │
-│   utils/productsData.json  — DDT product datasets        │
-│   data/negativeLoginData.csv — DDT negative test cases   │
+│   utils/testData.ts        — users, products, checkoutInfo │
+│   utils/loginData.json     — DDT login credentials        │
+│   utils/productsData.json  — DDT product datasets         │
+│   data/negativeLoginData.csv — DDT negative test cases    │
 └──────────────────────────────────────────────────────────┘
 
 ---
 
-## Project structure
+## Project Structure
 The core project layout for the `playwright-pom` package:
 
 ```
@@ -71,7 +86,7 @@ playwright-pom/
 
 ## Setup
 
-**Prerequisites:** Node.js 18+ and npm installed.
+**Prerequisites:** Node.js 18+ and npm.
 
 ```bash
 # Clone the repository
@@ -88,6 +103,8 @@ npx playwright install
 ---
 
 ## Running Tests
+
+Use the following commands to run the suite in different ways.
 
 ### Run all tests (3 browsers in parallel)
 ```bash
@@ -162,8 +179,7 @@ npx playwright test tests/login.spec.ts --debug
 ### Page Object Model (POM)
 
 Each page of the application is represented by one TypeScript class.
-Locators are stored as `private readonly` properties — test files
-never see a CSS selector or XPath expression directly.
+Locators are stored as `private readonly` properties, so test files never need to see a CSS selector or XPath expression directly.
 
 ```ts
 // ✅ What tests look like with POM
@@ -177,14 +193,13 @@ await page.locator('[data-test="password"]').fill('secret_sauce');
 await page.locator('[data-test="login-button"]').click();
 ```
 
-**Benefit:** When a selector changes, update one line in one page class.
-Zero test files need to change.
+**Benefit:** When a selector changes, update one line in one page class and keep the tests untouched.
 
 ---
 
 ### Data Driven Testing (DDT)
 
-Three DDT methods are demonstrated across the test suite:
+Three DDT approaches are demonstrated across the test suite:
 
 **Method 1 — Inline `for...of` loop** (`ddt-login.spec.ts`)
 ```ts
@@ -221,9 +236,7 @@ for (const { username, password, expectedError } of negativeCases) {
 
 ### Custom Fixtures
 
-Authentication setup is defined once in `fixtures/customFixtures.ts`
-and injected into any test that needs it — eliminating login code
-duplication across test files.
+Authentication setup is defined once in `fixtures/customFixtures.ts` and injected into any test that needs it. That removes repeated login code from the test files.
 
 ```ts
 // customFixtures.ts — defined once
@@ -245,8 +258,7 @@ test('add to cart', async ({ loggedInPage }) => {
 
 ## CI/CD
 
-The framework runs automatically on every push and pull request
-via GitHub Actions.
+The framework runs automatically on every push and pull request through GitHub Actions.
 
 **Pipeline steps:**
 1. Checkout code
@@ -256,15 +268,14 @@ via GitHub Actions.
 5. Run full test suite (`npx playwright test`)
 6. Upload HTML report as downloadable artifact
 
-View pipeline runs →
+View pipeline runs:
 [GitHub Actions](https://github.com/thebedigupta/playwright-pom-framework/actions)
 
 ---
 
 ## Target Application
 
-All tests run against **[Saucedemo](https://www.saucedemo.com)** —
-a purpose-built e-commerce demo site for automation practice.
+All tests run against **[Saucedemo](https://www.saucedemo.com)**, a purpose-built e-commerce demo site for automation practice.
 
 ---
 
@@ -274,5 +285,4 @@ a purpose-built e-commerce demo site for automation practice.
 BCA Final Year | GLA University
 Targeting SDET and QA Automation roles — 2026
 
-[GitHub](https://github.com/thebedigupta) ·
-[LinkedIn](https://linkedin.com/in/thebedigupta)
+[GitHub](https://github.com/thebedigupta) · [LinkedIn](https://linkedin.com/in/thebedigupta)
