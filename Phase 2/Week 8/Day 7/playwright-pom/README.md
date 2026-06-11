@@ -2,7 +2,10 @@
 
 ## Status
 
-[![Playwright Tests](https://github.com/thebedigupta/qa_learning_journal/actions/workflows/playwright.yml/badge.svg)] [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org) [![Playwright](https://img.shields.io/badge/Playwright-latest-green)](https://playwright.dev) [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+[![Playwright Tests](https://github.com/thebedigupta/qa_learning_journal/actions/workflows/playwright.yml/badge.svg)](https://playwright.dev) 
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org) 
+[![Playwright](https://img.shields.io/badge/Playwright-latest-green)](https://playwright.dev) 
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
 A production-ready end-to-end test automation framework built with **Playwright** and **TypeScript**.
 
