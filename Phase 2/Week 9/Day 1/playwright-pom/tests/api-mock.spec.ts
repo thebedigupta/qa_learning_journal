@@ -25,4 +25,8 @@ test("Mock API Partially", async ({ page }) => {
   await expect(page.getByText("Grapes fruits")).toBeVisible();
 });
 
-
+test("abort request", async ({ page }) => {
+  await page.route("*/**/api/v1/fruits", async (route) => route.abort());
+  await page.goto("https://demo.playwright.dev/api-mocking");
+  await expect(page.getByText("grapes fruit")).not.toBeVisible();
+});
