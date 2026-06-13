@@ -2,6 +2,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
+  expect: {
+    toHaveScreenshot: { maxDiffPixels: 50 },
+  },
   testDir: "./tests",
   fullyParallel: true,
   // How many tests run at the same time
@@ -10,6 +13,7 @@ export default defineConfig({
   workers: undefined,
   retries: 1,
   reporter: "html",
+  snapshotDir:"./screenshot",
 
   use: {
     baseURL: "https://www.saucedemo.com", // ← set once here, never hardcode in pages
