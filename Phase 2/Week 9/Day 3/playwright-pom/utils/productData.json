@@ -1,0 +1,17 @@
+[
+  {
+    "productName": "Sauce Labs Backpack",
+    "expectedPrice": "$29.99",
+    "description": "most expensive item"
+  },
+  {
+    "productName": "Sauce Labs Bike Light",
+    "expectedPrice": "$9.99",
+    "description": "cheapest item"
+  },
+  {
+    "productName": "Sauce Labs Bolt T-Shirt",
+    "expectedPrice": "$15.99",
+    "description": "mid-range item"
+  }
+]
