@@ -19,12 +19,12 @@ test("visual regression - login page baseline", async ({ page }) => {
   });
 });
 
-test("visual regression - login page with error message", async ({ page }) => {
+test("visual regression - login page with intentional breakdown", async ({ page }) => {
   await page.goto("https://www.saucedemo.com/");
   await page.evaluate(() => {
     const logo = document.querySelector(".login_logo");
     if (logo instanceof HTMLElement) {
-      logo.style.color = "red"; 
+      logo.style.color = "red";
     }
   });
 });
