@@ -23,3 +23,27 @@ test("Login-Page print all violations before asserting", async ({ page }) => {
   expect(criticalVoilation).toHaveLength(0); // assert zero CRITICAL violations only
 });
 
+test("Inventory page - scan after login", async ({ page }) => {
+  await page.goto("https://www.saucedemo.com");
+  await page.fill("#user-name", "standard_user");
+  await page.fill("#password", "secret_sauce");
+  await page.click("#login-button");
+  await expect(page.locator(".inventory_list")).toBeVisible();
+
+  // Scan the page after interaction - axe see whatever state the page is in
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa"])
+    .analyze();
+
+  // Log Voilation for learning - don't tell on demo site issues
+
+  console.log(`Violation Found :${results.violations.length}`);
+  results.violations.forEach((v) => {
+    console.log(`[${v.impact?.toUpperCase()}] ${v.id} ${v.description}`);
+  });
+  // Assert no critical violations (severity : critical breaks assistive tech)
+  const critical = results.violations.filter((v) => {
+    v.impact === "critical";
+  });
+  expect(critical).toHaveLength(0);
+});
