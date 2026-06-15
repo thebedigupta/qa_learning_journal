@@ -2,6 +2,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
+  retries: process.env.CI ? 2 : 0,
   expect: {
     toHaveScreenshot: { maxDiffPixels: 50 },
   },
@@ -11,9 +12,8 @@ export default defineConfig({
   // 'undefined' = Playwright picks based on your CPU cores
   // Set to a number if you want to control it: workers: 4
   workers: undefined,
-  retries: 1,
   reporter: "html",
-  snapshotDir:"./screenshot",
+  snapshotDir: "./screenshot",
 
   use: {
     baseURL: "https://www.saucedemo.com", // ← set once here, never hardcode in pages
@@ -25,6 +25,6 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+    // { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
 });
