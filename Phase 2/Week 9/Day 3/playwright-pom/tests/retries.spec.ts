@@ -34,3 +34,9 @@ test("timing based flakyness - retry with wait", async ({ page }, testInfo) => {
   await expect(page).toHaveTitle(/Swag Labs/i);
   console.log(`Passed on attempt #${testInfo.retry + 1}`);
 });
+
+test('stable test - always passes on first attempt', async ({ page }, testInfo) => {
+await page.goto('https://www.saucedemo.com');
+await expect(page).toHaveTitle(/Swag Labs/i);
+await expect(page.getByRole('button',{name:'Login'})).toBeVisible(); 
+})
