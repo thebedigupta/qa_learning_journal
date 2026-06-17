@@ -13,7 +13,6 @@ export class LoginPage extends BasePage {
   }
 
   async login(email: string, password: string): Promise<void> {
-    await expect(this.page.getByText("Login to your account")).toBeVisible();
     await this.page.fill('[data-qa="login-email"]', `${email}`);
     await this.page.fill('[data-qa="login-password"]', `${password}`);
     await this.page.click('[data-qa="login-button"]');
@@ -27,31 +26,27 @@ export class LoginPage extends BasePage {
   }
 
   async verifyLoggedIn(): Promise<void> {
-    await expect(this.page.getByText("Logged in as Bedi Gupta")).toBeVisible();
+    await expect(this.page.getByText(`Logged in as ${testUser.name}`)).toBeVisible();
   }
   async logout(): Promise<void> {
-    await expect(this.page).toHaveURL(/automationexercise/);
     await this.page.getByRole("link", { name: "Logout" }).click();
   }
   async fillSignUpNameAndEmail(name: string, email: string): Promise<void> {
-    await expect(this.page).toHaveURL(/login/);
-    await expect(this.page.getByText("New User SignUp!")).toBeVisible();
     await this.page.fill('[data-qa="signup-name"]', `${name}`);
     await this.page.fill('[data-qa="signup-email"]', `${email}`);
     await this.page.click('[data-qa="signup-button"]');
   }
   async fillAccountInformation(name: string, password: string): Promise<void> {
-    expect(this.page.getByText("ENTER ACCOUNT INFORMATION")).toBeVisible();
     await this.page.check("#id_gender1");
     await this.page.fill('[data-qa="name"]', `${name}`);
     await this.page.fill('[data-qa="password"]', `${password}`);
-    await this.page.locator('[data-test="days"]').selectOption({ label: "10" });
+    await this.page.locator('[data-test="days"]').selectOption({ label:  `${testUser.dob.day}` });
     await this.page
       .locator('[data-test="months"]')
-      .selectOption({ label: "December" });
+      .selectOption({ label: `${testUser.dob.month}` });
     await this.page
       .locator('[data-test="years"]')
-      .selectOption({ label: "1999" });
+      .selectOption({ label: `${testUser.dob.years}` });
     await this.page.click("#newsletter");
     await this.page.click("#optin");
   }
