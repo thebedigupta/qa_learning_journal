@@ -3,52 +3,116 @@ import { BasePage } from "./BasePage";
 import { testUser } from "../utlis/testData";
 
 export class LoginPage extends BasePage {
+  private readonly loginEmailInput = this.page.locator(
+    '[data-qa="login-email"]',
+  );
+  private readonly loginPasswordInput = this.page.locator(
+    '[data-qa="login-password"]',
+  );
+  private readonly loginButton = this.page.locator('[data-qa="login-button"]');
+  private readonly signUpNameInput = this.page.locator(
+    '[data-qa="signup-name"]',
+  );
+  private readonly signUpEmailInput = this.page.locator(
+    '[data-qa="signup-email"]',
+  );
+  private readonly signUpButton = this.page.locator(
+    '[data-qa="signup-button"]',
+  );
+  private readonly logoutButton = this.page.getByRole("link", {
+    name: "Logout",
+  });
+  private readonly continueButton = this.page.locator(
+    '[data-qa="continue-button"]',
+  );
+  private readonly radioButton = this.page.locator("#id_gender1");
+  private readonly accountInfoName = this.page.locator('[data-qa="name"]');
+  private readonly accountInfoPassword = this.page.locator(
+    '[data-qa="password"]',
+  );
+  private readonly accountInfoDays = this.page.locator('[data-qa="days"]');
+  private readonly accountInfoMonths = this.page.locator('[data-qa="months"]');
+  private readonly accountInfoYears = this.page.locator('[data-qa="years"]');
+  private readonly newsletterCheckbox = this.page.locator("#newsletter");
+  private readonly optinCheckbox = this.page.locator("#optin");
+  private readonly accountInfoFirstName = this.page.locator(
+    '[data-qa="first_name"]',
+  );
+  private readonly accountInfoLastName = this.page.locator(
+    '[data-qa="last_name"]',
+  );
+  private readonly accountInfoCompany = this.page.locator(
+    '[data-qa="company"]',
+  );
+  private readonly accountInfoAddress = this.page.locator(
+    '[data-qa="address"]',
+  );
+  private readonly accountInfoAddressTwo = this.page.locator(
+    '[data-qa="address2"]',
+  );
+  private readonly accountInfoCountry = this.page.locator(
+    '[data-qa="country"]',
+  );
+  private readonly accountInfoState = this.page.locator('[data-qa="state"]');
+  private readonly accountInfoCity = this.page.locator('[data-qa="city"]');
+  private readonly accountInfoZipCode = this.page.locator(
+    '[data-qa="zipcode"]',
+  );
+  private readonly accountInfoMobileNo = this.page.locator(
+    '[data-qa="mobile_number"]',
+  );
+  private readonly createAccountButton = this.page.locator(
+    '[data-qa="create-account"]',
+  );
+
   constructor(page: Page) {
     super(page);
   }
 
   async open(): Promise<void> {
     await this.init();
-    await this.navigate();
+    await this.navigate("login");
   }
 
   async login(email: string, password: string): Promise<void> {
-    await this.page.fill('[data-qa="login-email"]', `${email}`);
-    await this.page.fill('[data-qa="login-password"]', `${password}`);
-    await this.page.click('[data-qa="login-button"]');
+    await this.loginEmailInput.fill(email);
+    await this.loginPasswordInput.fill(password);
+    await this.loginButton.click();
   }
 
   async verifyLoginError(): Promise<void> {
     await expect(this.page).toHaveURL(/login/i);
     await expect(
-      this.page.getByText("Your email or password is incorrect!"),
+      this.page.getByText(/Your email or password is incorrect!/i),
     ).toBeVisible();
   }
 
   async verifyLoggedIn(): Promise<void> {
-    await expect(this.page.getByText(`Logged in as ${testUser.name}`)).toBeVisible();
+    await expect(
+      this.page.getByText(`Logged in as ${testUser.name}`),
+    ).toBeVisible();
   }
   async logout(): Promise<void> {
-    await this.page.getByRole("link", { name: "Logout" }).click();
+    await this.logoutButton.click();
   }
   async fillSignUpNameAndEmail(name: string, email: string): Promise<void> {
-    await this.page.fill('[data-qa="signup-name"]', `${name}`);
-    await this.page.fill('[data-qa="signup-email"]', `${email}`);
-    await this.page.click('[data-qa="signup-button"]');
+    await this.signUpNameInput.fill(name);
+    await this.signUpEmailInput.fill(email);
+    await this.signUpButton.click();
   }
   async fillAccountInformation(name: string, password: string): Promise<void> {
-    await this.page.check("#id_gender1");
-    await this.page.fill('[data-qa="name"]', `${name}`);
-    await this.page.fill('[data-qa="password"]', `${password}`);
-    await this.page.locator('[data-test="days"]').selectOption({ label:  `${testUser.dob.day}` });
-    await this.page
-      .locator('[data-test="months"]')
-      .selectOption({ label: `${testUser.dob.month}` });
-    await this.page
-      .locator('[data-test="years"]')
-      .selectOption({ label: `${testUser.dob.years}` });
-    await this.page.click("#newsletter");
-    await this.page.click("#optin");
+    await this.radioButton.check();
+    await this.accountInfoName.fill(name);
+    await this.accountInfoPassword.fill(password);
+
+    const { day, month, year } = testUser.dob;
+    await this.accountInfoDays.selectOption({ label: day });
+    await this.accountInfoMonths.selectOption({
+      label: month,
+    });
+    await this.accountInfoYears.selectOption({ label: year });
+    await this.newsletterCheckbox.check();
+    await this.optinCheckbox.check();
   }
 
   async fillAddressInformation(
@@ -56,37 +120,39 @@ export class LoginPage extends BasePage {
     lname: string,
     company: string,
     address: string,
+    addressTwo: string,
+    country: string,
     state: string,
     city: string,
     zipcode: string,
     mobile: string,
   ): Promise<void> {
-    await this.page.fill('[data-qa="first_name"]', `${fname}`);
-    await this.page.fill('[data-qa="last_name"]', `${lname}`);
-    await this.page.fill('[data-qa="company"]', `${company}`);
-    await this.page.fill('[data-qa="address"]', `${address}`);
-    await this.page.fill('[data-qa="address2"]', `${address}`);
-    await this.page
-      .locator('[data-qa="country"]')
-      .selectOption({ label: "India" });
-    await this.page.fill('[data-qa="state"]', `${state}`);
-    await this.page.fill('[data-qa="city"]', `${city}`);
-    await this.page.fill('[data-qa="zipcode"]', `${zipcode}`);
-    await this.page.fill('[data-qa="mobile_number"]', `${mobile}`);
-    await this.page.click('[data-qa="create-account"]');
+    await this.accountInfoFirstName.fill(fname);
+    await this.accountInfoLastName.fill(lname);
+    await this.accountInfoCompany.fill(company);
+    await this.accountInfoAddress.fill(address);
+    await this.accountInfoAddressTwo.fill(addressTwo);
+    await this.accountInfoCountry.selectOption({ label: country });
+    await this.accountInfoState.fill(state);
+    await this.accountInfoCity.fill(city);
+    await this.accountInfoZipCode.fill(zipcode);
+    await this.accountInfoMobileNo.fill(mobile);
+    await this.createAccountButton.click();
   }
 
   async verifyAccountCreated(): Promise<void> {
-    await expect(this.page.getByText('Account Created')).toBeVisible();
-    await this.page.getByRole('button',{name : 'Continue'}).click();
+    await expect(this.page.getByText(/Account Created/i)).toBeVisible();
+    await this.page.getByRole("button", { name: "Continue" }).click();
   }
 
-  async deleteAccount():Promise<void>{
-    await expect(this.page.getByText('Account deleted')).toBeVisible();
-    await this.page.locator('[data-qa="continue-button"]').click();
+  async deleteAccount(): Promise<void> {
+    await expect(this.page.getByText(/Account deleted/i)).toBeVisible();
+    await this.continueButton.click();
   }
 
-  async verifyEmailAlreadyExist():Promise<void>{
-    await expect(this.page.getByText('Email Address already exist!')).toBeVisible()
+  async verifyEmailAlreadyExist(): Promise<void> {
+    await expect(
+      this.page.getByText(/Email Address already exist!/i),
+    ).toBeVisible();
   }
 }
