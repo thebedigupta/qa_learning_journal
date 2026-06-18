@@ -5,7 +5,7 @@ export const testUser = {
     name : 'Automation User',
     password : 'Test@1234',
     title : 'Mr',
-    dob : {day: '15',month:'January',years: '1995'},
+    dob : {day: '15',month:'January',year: '1995'},
     firstName : 'Automation',
     lastName : 'User',
     company: 'Test Corp',
