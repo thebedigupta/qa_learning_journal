@@ -12,6 +12,7 @@ export class ContactUsPage extends BasePage {
   private readonly uploadFileInput = this.page.locator('input[type="file"]');
   private readonly submitButton = this.page.locator('[data-qa="submit-button"]');
   private readonly successBanner = this.page.locator(".status.alert-success");
+  private readonly homeButton = this.page.locator('[data-qa="home"]');
 
   constructor(page: Page) {
     super(page);
@@ -45,5 +46,9 @@ export class ContactUsPage extends BasePage {
 
   async verifySuccessBannerVisible(): Promise<void> {
     await expect(this.successBanner).toBeVisible();
+  }
+
+  async goBackHome(): Promise<void> {
+    await this.homeButton.click();
   }
 }
