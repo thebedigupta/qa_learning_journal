@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { blockAds, autoAcceptDialogs } from "../utlis/helpers";
+import { blockAds, autoAcceptDialogs } from "../utils/helpers";
 
 export class BasePage {
   constructor(protected page: Page) {}

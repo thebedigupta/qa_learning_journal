@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { testUser } from "../utlis/testData";
+import { testUser } from "../utils/testData";
 
 export class LoginPage extends BasePage {
   private readonly loginEmailInput = this.page.locator(
