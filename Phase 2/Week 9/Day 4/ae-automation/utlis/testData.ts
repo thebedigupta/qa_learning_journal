@@ -12,8 +12,9 @@ export const testUser = {
     address1 : '123 MG Road',
     address2 : 'Block B',
     country : 'India',
-    state: 'Delhi',
-    city : '110001',
+    state: 'Goa',
+    city : 'Madgaon',
+    zipcode : '110001',
     mobile: '9876543210'
 }
 

@@ -2,6 +2,12 @@ import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { testUser } from "../utlis/testData";
 
+interface UserDob{
+  day:string;
+  month : string;
+  year:string;
+}
+
 export class LoginPage extends BasePage {
   private readonly loginEmailInput = this.page.locator(
     '[data-qa="login-email"]',
@@ -100,12 +106,12 @@ export class LoginPage extends BasePage {
     await this.signUpEmailInput.fill(email);
     await this.signUpButton.click();
   }
-  async fillAccountInformation(name: string, password: string): Promise<void> {
+  async fillAccountInformation(name: string, password: string,dob :UserDob): Promise<void> {
     await this.radioButton.check();
     await this.accountInfoName.fill(name);
     await this.accountInfoPassword.fill(password);
 
-    const { day, month, year } = testUser.dob;
+    const { day, month, year } = dob;
     await this.accountInfoDays.selectOption({ label: day });
     await this.accountInfoMonths.selectOption({
       label: month,
