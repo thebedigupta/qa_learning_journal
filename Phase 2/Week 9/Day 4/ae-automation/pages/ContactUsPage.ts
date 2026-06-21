@@ -1,7 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import * as path from 'path';
-
+import * as path from "path";
 
 export class ContactUsPage extends BasePage {
   private readonly getInTouchText = this.page.locator(".title");
@@ -10,7 +9,9 @@ export class ContactUsPage extends BasePage {
   private readonly formSubjectInput = this.page.locator('[data-qa="subject"]');
   private readonly formMessageInput = this.page.locator('[data-qa="message"]');
   private readonly uploadFileInput = this.page.locator('input[type="file"]');
-  private readonly submitButton = this.page.locator('[data-qa="submit-button"]');
+  private readonly submitButton = this.page.locator(
+    '[data-qa="submit-button"]',
+  );
   private readonly successBanner = this.page.locator(".status.alert-success");
   private readonly homeButton = this.page.locator('[data-qa="home"]');
 
@@ -38,7 +39,7 @@ export class ContactUsPage extends BasePage {
     await this.formSubjectInput.fill(subject);
     await this.formMessageInput.fill(message);
     await this.uploadFileInput.setInputFiles(
-      path.join(__dirname, '../playwright.config.ts')
+      path.join(__dirname, "../playwright.config.ts"),
     );
     this.page.once("dialog", (dialog) => dialog.accept());
     await this.submitButton.click();
