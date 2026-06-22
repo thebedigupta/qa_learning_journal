@@ -1,15 +1,12 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-<<<<<<< HEAD
 import { testUser } from "../utils/testData";
-=======
 
 interface UserDob {
   day: string;
   month: string;
   year: string;
 }
->>>>>>> feature/login-register-tests
 
 export class LoginPage extends BasePage {
   private readonly loginEmailInput = this.page.locator(
