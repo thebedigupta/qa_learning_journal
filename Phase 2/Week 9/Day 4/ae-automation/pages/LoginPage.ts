@@ -1,11 +1,10 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { testUser } from "../utlis/testData";
 
-interface UserDob{
-  day:string;
-  month : string;
-  year:string;
+interface UserDob {
+  day: string;
+  month: string;
+  year: string;
 }
 
 export class LoginPage extends BasePage {
@@ -70,6 +69,28 @@ export class LoginPage extends BasePage {
   private readonly createAccountButton = this.page.locator(
     '[data-qa="create-account"]',
   );
+  private readonly loginErrorMessage = this.page.getByText(
+    /Your email or password is incorrect!/i,
+  );
+
+  private loggedInUserName(username: string) {
+    return this.page.getByText(`Logged in as ${username}`);
+  }
+
+  private readonly accountCreatedText = this.page.getByText(/Account Created/i);
+  private readonly emailExist = this.page.getByText(
+    /Email Address already exist!/i,
+  );
+  private readonly accountDeleteBtn = this.page.locator(
+    'a[href="/delete_account"]',
+  );
+  private readonly accountDeleteTxt = this.page.getByText(/Account deleted/i);
+  private titleRadioBtn(salutation: string) {
+    const targetId = salutation.toLowerCase().includes("mrs")
+      ? "#id_gender2"
+      : "#id_gender1";
+    return this.page.locator(targetId);
+  }
 
   constructor(page: Page) {
     super(page);
@@ -88,15 +109,11 @@ export class LoginPage extends BasePage {
 
   async verifyLoginError(): Promise<void> {
     await expect(this.page).toHaveURL(/login/i);
-    await expect(
-      this.page.getByText(/Your email or password is incorrect!/i),
-    ).toBeVisible();
+    await expect(this.loginErrorMessage).toBeVisible();
   }
 
-  async verifyLoggedIn(): Promise<void> {
-    await expect(
-      this.page.getByText(`Logged in as ${testUser.name}`),
-    ).toBeVisible();
+  async verifyLoggedIn(username: string): Promise<void> {
+    await expect(this.loggedInUserName(username)).toBeVisible();
   }
   async logout(): Promise<void> {
     await this.logoutButton.click();
@@ -106,7 +123,13 @@ export class LoginPage extends BasePage {
     await this.signUpEmailInput.fill(email);
     await this.signUpButton.click();
   }
-  async fillAccountInformation(name: string, password: string,dob :UserDob): Promise<void> {
+  async fillAccountInformation(
+    salutation: string,
+    name: string,
+    password: string,
+    dob: UserDob,
+  ): Promise<void> {
+    await this.titleRadioBtn(salutation).check();
     await this.radioButton.check();
     await this.accountInfoName.fill(name);
     await this.accountInfoPassword.fill(password);
@@ -147,18 +170,17 @@ export class LoginPage extends BasePage {
   }
 
   async verifyAccountCreated(): Promise<void> {
-    await expect(this.page.getByText(/Account Created/i)).toBeVisible();
-    await this.page.getByRole("button", { name: "Continue" }).click();
+    await expect(this.accountCreatedText).toBeVisible();
+    await this.continueButton.click();
   }
 
   async deleteAccount(): Promise<void> {
-    await expect(this.page.getByText(/Account deleted/i)).toBeVisible();
+    await this.accountDeleteBtn.click();
+    await expect(this.accountDeleteTxt).toBeVisible();
     await this.continueButton.click();
   }
 
   async verifyEmailAlreadyExist(): Promise<void> {
-    await expect(
-      this.page.getByText(/Email Address already exist!/i),
-    ).toBeVisible();
+    await expect(this.emailExist).toBeVisible();
   }
 }
