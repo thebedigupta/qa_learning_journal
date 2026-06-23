@@ -4,7 +4,7 @@ import {
   generateUniqueEmail,
   testUser,
   invalidUser,
-} from "../utlis/testData";
+} from "../utils/testData";
 
 // TC1 - Register User
 test("TC1 - Register new user and delete account", async ({ page }) => {
