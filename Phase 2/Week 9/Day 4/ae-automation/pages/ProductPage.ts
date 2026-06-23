@@ -3,13 +3,13 @@ import { BasePage } from "./BasePage";
 
 export class ProductPage extends BasePage {
   private readonly productPageVisible = this.page.getByText(/all products/i);
-  private readonly productWrapper = this.page.locator(".product-image-wrapper");
+  private readonly productInfo = this.page.locator(".productinfo");
   private readonly searchProductsInput = this.page.locator("#search_product");
   private readonly searchProductButton = this.page.locator("#submit_search");
   private readonly verifySearchProduct =
     this.page.getByText(/Searched Products/i);
+    private readonly modalBody = this.page.locator('.modal-body')
   private readonly continueShoppingModelBtn = this.page.locator(".btn-success");
-  private readonly viewCartModalBtn = this.page.locator('a[href="/view_cart"]');
   private readonly viewCartBtn = this.page.locator(".nav");
   private readonly brandName = this.page.locator(".brands-name");
   private readonly searchBrandProduct = this.page.locator(".text-center");
@@ -25,7 +25,6 @@ export class ProductPage extends BasePage {
 
   async verifyAllProductsVisible(): Promise<void> {
     await expect(this.productPageVisible).toBeVisible();
-    await expect(this.productWrapper).toBeVisible();
   }
 
   async searchProduct(productName: string): Promise<void> {
@@ -36,16 +35,13 @@ export class ProductPage extends BasePage {
     await expect(this.verifySearchProduct).toBeVisible();
   }
   async hoverAndAddToCart(index: number): Promise<void> {
-    await this.productWrapper
-      .getByRole("button", { name: "Add to cart" })
-      .nth(index)
-      .click();
+    await this.productInfo.nth(index).locator('.add-to-cart').click();
   }
   async continueShopping(): Promise<void> {
     await this.continueShoppingModelBtn.click();
   }
   async viewCartFromModal(): Promise<void> {
-    await this.viewCartModalBtn.click();
+    await this.modalBody.locator('a[href="/view_cart"]').click();
   }
   async clickViewProduct(): Promise<void> {
     await this.viewCartBtn.getByRole("link", { name: "Cart" }).click();

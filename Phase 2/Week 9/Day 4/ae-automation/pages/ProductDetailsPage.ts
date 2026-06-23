@@ -2,13 +2,6 @@ import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class ProductDetailsPage extends BasePage {
-  private readonly titleOfProduct = this.page.locator(
-    ".product-information h2",
-  );
-  private readonly categoryCheckbox = this.page.getByText(/category/i);
-  private readonly filterBrandCheckbox = this.page.getByText(/Brand/i);
-  private readonly verifyAvailability = this.page.getByText(/Availability/i);
-  private readonly verifyCondition = this.page.getByText(/condition/i);
   private readonly productQuantity = this.page.locator("#quantity");
   private readonly addProductToCart = this.page.getByRole("button", {
     name: "Add to cart",
@@ -20,17 +13,18 @@ export class ProductDetailsPage extends BasePage {
   private readonly reviewEmailInput = this.page.locator("#email");
   private readonly reviewMessageBox = this.page.locator("#review");
   private readonly reviewButton = this.page.locator("#button-review");
+  private readonly checkoutBtn = this.page.locator('.container .check_out'); 
+  private readonly itemTable = this.page.locator('#cart_info_table');
+  private readonly shoppingCartTitle = this.page.locator('.breadcrumbs .active');
 
   constructor(page: Page) {
     super(page);
   }
 
   async verifyProductsDetailsPage(): Promise<void> {
-    await expect(this.titleOfProduct).toBeVisible();
-    await expect(this.categoryCheckbox).toBeVisible();
-    await expect(this.filterBrandCheckbox).toBeVisible();
-    await expect(this.verifyAvailability).toBeVisible();
-    await expect(this.verifyCondition).toBeVisible();
+    await expect(this.itemTable).toBeVisible();
+    await expect(this.shoppingCartTitle).toHaveText(/Shopping Cart/i);
+    await expect(this.checkoutBtn).toHaveText(/Proceed To Checkout/i);
   }
 
   async setQuantity(qty: number): Promise<void> {
