@@ -18,6 +18,12 @@ export const testUser = {
     mobile: '9876543210'
 }
 
+export const formfill={
+name:'Automation TestUser',
+subject:'Enquiry form is working or not',
+message: 'I hope this message reached to you'
+}
+
 export const payment ={
     nameOnCard : 'Automation User',
     cardNumber : '9876543210112345',

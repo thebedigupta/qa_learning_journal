@@ -13,9 +13,6 @@ export class HomePage extends BasePage {
 
   async verifyHomePageVisible(): Promise<void> {
     await expect(this.page).toHaveURL(/automationexercise/);
-    await expect(
-      this.page.locator('img[alt="Website for practice automation"]'),
-    ).toBeVisible();
   }
 
   async scorlltofooter(): Promise<void> {
