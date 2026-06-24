@@ -1,11 +1,13 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
-export class CartPage extends BasePage {
-  private readonly productCountTable = this.page.locator("tbody tr");
-  private readonly shoppingCartPage = this.page.getByText("Shopping Cart");
-  private readonly productCount = this.page.locator(".table .cart_quantity");
-  constructor(page: Page) {
+export class CartPage extends BasePage 
+    private readonly productCountTable = this.page.locator('tbody tr');
+    private readonly shoppingCartPage = this.page.getByText('Shopping Cart') ; 
+    private readonly productCount = this.page.locator('.cart_quantity');
+    private readonly subscriptionEmailInput = this.page.locator('#susbscribe_email')
+    private readonly subscribeBtn = this.page.locator('#subscribe');
+    constructor(page: Page) {
     super(page);
   }
 
@@ -14,10 +16,8 @@ export class CartPage extends BasePage {
     await this.navigate("view_cart");
   }
 
-  async verifyCartPageDisplayed(): Promise<void> {
-    await expect(this.page).toHaveURL(
-      "https://www.automationexercise.com/view_cart",
-    );
+  async verifyCartPageDisplayed():Promise<void>{
+    await expect(this.page).toHaveURL('https://www.automationexercise.com/view_cart');
   }
 
   async verifyProductCount(count: number): Promise<void> {
@@ -39,5 +39,10 @@ export class CartPage extends BasePage {
 
   async removeFirstProduct(): Promise<void> {
     await this.productCount.nth(0).locator("a").click();
+  }
+
+  async addEmailToSubscription(email:string):Promise<void>{
+    await this.subscriptionEmailInput.fill(email);
+    await this.subscribeBtn.click();
   }
 }
