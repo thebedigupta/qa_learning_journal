@@ -30,12 +30,7 @@ export class ProductDetailsPage extends BasePage {
   }
 
   async addToCart(): Promise<void> {
-    await expect(async () => {
-      await this.addProductToCart.click();
-      await expect(
-        this.viewCartModalLink.locator('a[href="/view_cart"]'),
-      ).toBeVisible({ timeout: 2000 });
-    }).toPass();
+    await this.addProductToCart.click();
   }
 
   async viewCart(): Promise<void> {

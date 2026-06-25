@@ -45,6 +45,6 @@ test.describe("Cart and Quantity Verification Suite", () => {
     await productDetailPage.setQuantity(4);
     await productDetailPage.addToCart();
     await productDetailPage.viewCart();
-    await cartPage.verifyProductQuantity(0, 4);
+    await cartPage.verifyProductQuantity('blue top',4);
   });
 });

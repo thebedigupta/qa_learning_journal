@@ -1,6 +1,5 @@
 import { Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { testUser } from "../utils/testData";
 
 interface UserDob {
   day: string;

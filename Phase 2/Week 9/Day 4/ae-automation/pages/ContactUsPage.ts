@@ -10,7 +10,7 @@ export class ContactUsPage extends BasePage {
     '[data-qa="submit-button"]',
   );
   private readonly successBanner = this.page.locator(".status.alert-success");
-  private readonly homeButton = this.page.getByRole("link", { name: " Home" });
+  private readonly homeButton = this.page.getByRole("link", { name: "Home" });
 
   constructor(page: Page) {
     super(page);
