@@ -47,3 +47,17 @@ await page.pause();
 
 - From the Inspector, you can click "Explore" and manually click around the webpage. It will generate the exact code needed for those interactions, which you can then copy and paste into your loginPage.ts methods.
 
+__The Recommended Workflow__
+
+To fix this permanently, try shifting your workflow to this step-by-step process:
+
+1. Open the live browser using the VS Code extension or Playwright Inspector.
+
+2. Identify the element and let Playwright generate the strict, reliable locator for you.
+
+3. Write the locator into your loginPage.ts file.
+
+4. Write the interaction method (e.g., async clickSubmit() { await this.submitButton.click(); }).
+
+5. Write the test step in your spec file and run it.
+
