@@ -38,3 +38,12 @@ npx playwright test --ui
 
 - It includes a "Locator" tab at the bottom. You can paste your intended locator (e.g., page.getByRole('button', { name: 'Submit' })) into this tab before putting it in your POM file, and Playwright will highlight the exact element it hits on the screen in real-time.
 
+__3. The await page.pause() Method__
+
+If you are mid-way through writing a test and want to build the rest of your Page Object interactively, drop this line into your test file:
+await page.pause();
+
+- Run the test. Playwright will freeze execution exactly at that line and open the Playwright Inspector.
+
+- From the Inspector, you can click "Explore" and manually click around the webpage. It will generate the exact code needed for those interactions, which you can then copy and paste into your loginPage.ts methods.
+
