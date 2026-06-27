@@ -27,3 +27,14 @@ __1. First Tool__
 
 - When you click the element, Playwright will automatically paste that verified locator directly into your code editor.
 
+__2. Second Tool__
+
+**Playwright UI Mode**
+
+Instead of running tests blindly in the terminal, run them in UI mode:
+npx playwright test --ui
+
+- This opens a time-travel UI. You can see the DOM snapshot for every single action your code takes.
+
+- It includes a "Locator" tab at the bottom. You can paste your intended locator (e.g., page.getByRole('button', { name: 'Submit' })) into this tab before putting it in your POM file, and Playwright will highlight the exact element it hits on the screen in real-time.
+
