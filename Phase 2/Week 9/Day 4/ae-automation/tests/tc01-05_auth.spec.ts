@@ -47,7 +47,7 @@ test("TC1 - Register new user and delete account", async ({ page }) => {
 });
 
 // TC2 - Login with valid credentials
-test("TC2 - Login with valid credentials", async ({ page }) => {
+test.only("TC2 - Login with valid credentials", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const email = generateUniqueEmail();
   const {

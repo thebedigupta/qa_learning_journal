@@ -1,4 +1,4 @@
-import { Page, expect } from "@playwright/test";
+import { Page, Response, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class ProductDetailsPage extends BasePage {
@@ -17,12 +17,13 @@ export class ProductDetailsPage extends BasePage {
   }
 
   async verifyProductsDetailsPage(): Promise<void> {
-    await expect(this.page.locator(".product-information")).toBeVisible();
+    await expect(this.page.getByRole('img',{name:'ecommerce website products'}).first()).toBeVisible();
     await expect(
       this.page
         .locator(".product-information")
         .getByRole("button", { name: "Add to cart" }),
     ).toBeVisible();
+    await this.page.waitForLoadState("networkidle");
   }
 
   async setQuantity(qty: number): Promise<void> {
@@ -30,11 +31,19 @@ export class ProductDetailsPage extends BasePage {
   }
 
   async addToCart(): Promise<void> {
+    const responsePromise = this.page.waitForResponse(
+      (response: Response) =>
+        response.url().includes("/add_to_cart/") && response.status() === 200,
+      { timeout: 30_000 },
+    );
+
     await this.addProductToCart.click();
+
+    const response = await responsePromise;
+    expect(await response.text()).toBe("Added To Cart");
   }
 
   async viewCart(): Promise<void> {
-    // Wait for the modal link text specifically to pop up on screen
     await this.viewCartModalLink.locator('a[href="/view_cart"]').click();
   }
 
