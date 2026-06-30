@@ -7,6 +7,10 @@ export class CartPage extends BasePage {
     private readonly productCount = this.page.locator('.cart_quantity');
     private readonly subscriptionEmailInput = this.page.locator('#susbscribe_email')
     private readonly subscribeBtn = this.page.locator('#subscribe');
+    // function
+    productNameFunction (name:string){
+      return this.page.locator('tbody').filter({hasText: name})
+    }
 
     constructor(page: Page) {
     super(page);
@@ -29,13 +33,8 @@ export class CartPage extends BasePage {
     await expect(this.shoppingCartPage).toBeVisible();
   }
 
-  async verifyProductQuantity(
-    index: number,
-    productInCart: number,
-  ): Promise<void> {
-    await expect(
-      this.productCount.nth(index).locator(".disabled"),
-    ).toContainText(`${productInCart}`);
+  async verifyProductQuantity(productName:string,productInCart:number):Promise<void>{
+    await expect(this.productNameFunction(productName).getByRole('cell',{name:String(productInCart)})).toBeVisible();
   }
 
   async removeFirstProduct(): Promise<void> {
