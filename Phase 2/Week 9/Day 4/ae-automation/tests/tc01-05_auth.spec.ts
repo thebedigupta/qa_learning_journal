@@ -47,7 +47,7 @@ test("TC1 - Register new user and delete account", async ({ page }) => {
 });
 
 // TC2 - Login with valid credentials
-test.only("TC2 - Login with valid credentials", async ({ page }) => {
+test("TC2 - Login with valid credentials", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const email = generateUniqueEmail();
   const {
@@ -164,6 +164,7 @@ test('TC5 - Register with existing email',async({page})=>{
   await loginPage.fillAddressInformation(firstName,lastName,company,address1,address2,country,state,city,zipcode,mobile)
   await loginPage.verifyAccountCreated();
   await loginPage.logout();
+  await page.waitForLoadState('networkidle');
   await loginPage.open()
   await loginPage.fillSignUpNameAndEmail(name,email);
   await loginPage.verifyEmailAlreadyExist();
