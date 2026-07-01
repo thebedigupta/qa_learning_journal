@@ -11,6 +11,10 @@ export class CheckoutPage extends BasePage {
   private readonly clickRegisterLoginBtn = this.page.getByRole("link", {
     name: "Register/Login",
   });
+  private readonly deliveryAddress = this.page.locator('#address_delivery');
+  private readonly deliveryInvoice = this.page.locator('#address_invoice');
+  private readonly commentBox = this.page.locator('textarea.form-control');
+  private readonly placeOrderBtn = this.page.getByRole('link',{name:'Place Order',exact:true});
   constructor(page: Page) {
     super(page);
   }
@@ -26,17 +30,17 @@ export class CheckoutPage extends BasePage {
   }
 
   async verifyDeliveryAddress(address: string,country:string): Promise<void> {
-    await expect(this.page.locator('#address_delivery').getByText(address)).toBeVisible();
-    await expect(this.page.locator('#address_delivery').getByText(country)).toBeVisible();
+    await expect(this.deliveryAddress.getByText(address)).toBeVisible();
+    await expect(this.deliveryAddress.getByText(country)).toBeVisible();
   }
 
   async verifyBillingAddress(address:string,country:string){
-    await expect(this.page.locator('#address_invoice').getByText(address)).toBeVisible();
-    await expect(this.page.locator('#address_invoice').getByText(country)).toBeVisible();
+    await expect(this.deliveryInvoice.getByText(address)).toBeVisible();
+    await expect(this.deliveryInvoice.getByText(country)).toBeVisible();
   }
 
   async enterCommentAndPlaceOrder(comment:string):Promise<void>{
-    await this.page.locator('textarea.form-control').fill(comment);
-    await this.page.getByRole('link',{name:'Place Order',exact:true}).click();
+    await this.commentBox.fill(comment);
+    await this.placeOrderBtn.click();
   }
 }
