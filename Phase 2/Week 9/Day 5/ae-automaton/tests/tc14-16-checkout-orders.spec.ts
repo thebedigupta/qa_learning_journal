@@ -64,3 +64,51 @@ test("TC14: Place order - register while checkout", async ({ page }) => {
   await paymentPage.continueButton();
   await loginPage.deleteAccount();
 });
+
+
+test('TC15: Place Order - Register Before Checkout',async({page})=>{
+  const loginPage = new LoginPage(page);
+  const productPage = new ProductPage(page);
+  const cartPage = new CartPage(page);
+  const checkoutPage = new CheckoutPage(page);
+  const paymentPage = new PaymentPage(page);
+  const email = generateUniqueEmail();
+
+
+  // Register First
+  await loginPage.open();
+  await loginPage.fillSignUpNameAndEmail(testUser.name,email);
+  await loginPage.fillAccountInformation(
+    testUser.title,
+    testUser.name,
+    testUser.password,
+    testUser.dob,
+  );
+   await loginPage.fillAddressInformation(
+    testUser.firstName,
+    testUser.lastName,
+    testUser.company,
+    testUser.address1,
+    testUser.address2,
+    testUser.country,
+    testUser.state,
+    testUser.city,
+    testUser.zipcode,
+    testUser.mobile,
+  );
+  await loginPage.verifyAccountCreated();
+  await loginPage.verifyLoggedIn(testUser.firstName);
+  
+  // Add Product and checkout 
+
+  await productPage.quickAddFirstProductToCart();
+  await cartPage.open();
+  await cartPage.verifyCartPageDisplayed();
+  await cartPage.proccedToCheckout();
+
+  await checkoutPage.verifyCheckoutPage();
+  await completePaymentAndVerify(checkoutPage,paymentPage);
+
+  await paymentPage.continueButton();
+  await loginPage.deleteAccount();
+})
