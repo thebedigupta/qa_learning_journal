@@ -8,9 +8,7 @@ export class CheckoutPage extends BasePage {
   private readonly registerLoginModalPopup = this.page.getByText(
     "Checkout Register / Login",
   );
-  private readonly clickRegisterLoginBtn = this.page.getByRole("link", {
-    name: "Register/Login",
-  });
+  private readonly clickRegisterLoginBtn = this.page.locator('.text-center');
   private readonly deliveryAddress = this.page.locator('#address_delivery');
   private readonly deliveryInvoice = this.page.locator('#address_invoice');
   private readonly commentBox = this.page.locator('textarea.form-control');
@@ -26,7 +24,7 @@ export class CheckoutPage extends BasePage {
 
   async clickRegisterLoginFromModal(): Promise<void> {
     await expect(this.registerLoginModalPopup).toBeVisible();
-    await this.clickRegisterLoginBtn.click();
+    await this.clickRegisterLoginBtn.locator('a[href="/login"]').click();
   }
 
   async verifyDeliveryAddress(address: string,country:string): Promise<void> {

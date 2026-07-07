@@ -8,9 +8,9 @@ export class ProductPage extends BasePage {
   private readonly searchProductButton = this.page.locator("#submit_search");
   private readonly verifySearchProduct =
     this.page.getByText(/Searched Products/i);
-    private readonly modalBody = this.page.locator('.modal-body')
+  private readonly modalBody = this.page.locator(".modal-body");
   private readonly continueShoppingModelBtn = this.page.locator(".btn-success");
-  private readonly viewCartBtn = this.page.locator(".nav");
+  private readonly productSelection = this.page.locator('.product-image-wrapper .choose');
   private readonly brandName = this.page.locator(".brands-name");
   private readonly searchBrandProduct = this.page.locator(".text-center");
 
@@ -35,7 +35,7 @@ export class ProductPage extends BasePage {
     await expect(this.verifySearchProduct).toBeVisible();
   }
   async hoverAndAddToCart(index: number): Promise<void> {
-    await this.productInfo.nth(index).locator('.add-to-cart').click();
+    await this.productInfo.nth(index).locator(".add-to-cart").click();
   }
   async continueShopping(): Promise<void> {
     await this.continueShoppingModelBtn.click();
@@ -44,7 +44,7 @@ export class ProductPage extends BasePage {
     await this.modalBody.locator('a[href="/view_cart"]').click();
   }
   async clickViewProduct(): Promise<void> {
-    await this.viewCartBtn.getByRole("link", { name: "Cart" }).click();
+    await this.productSelection.first().click();
   }
   async clickBrand(brandName: string): Promise<void> {
     await this.brandName
@@ -55,5 +55,13 @@ export class ProductPage extends BasePage {
     await expect(this.searchBrandProduct).toContainText(
       new RegExp(`Brand - ${brandName} Products`, "i"),
     );
+  }
+
+  async quickAddFirstProductToCart(): Promise<void> {
+    await this.navigate("products");
+    const firstProduct = this.page.locator(".product-image-wrapper").first();
+    await firstProduct.hover();
+    await firstProduct.getByText("Add to cart").first().click();
+    await this.page.getByRole("button", { name: "Continue Shopping" }).click();
   }
 }
