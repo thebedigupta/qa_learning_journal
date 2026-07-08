@@ -1,0 +1,179 @@
+import { test, expect } from "@playwright/test";
+import { HomePage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { ProductPage } from "../pages/ProductPage";
+import { CartPage } from "../pages/CartPage";
+import { CheckoutPage } from "../pages/CheckoutPage";
+import { PaymentPage } from "../pages/PaymentPage";
+import { generateUniqueEmail, testUser, payment } from "../utils/testData";
+
+// ── Shared helper ────────────────────────────────────────────────────────────
+async function completePaymentAndVerify(
+  checkoutPage: CheckoutPage,
+  paymentPage: PaymentPage,
+) {
+  await checkoutPage.enterCommentAndPlaceOrder("Automated order comment");
+  await paymentPage.fillPaymentDetails({
+    cardName: payment.nameOnCard,
+    cardNumber: payment.cardNumber,
+    cvcNo: payment.cvc,
+    month: payment.expiryMonth,
+    year: payment.expiryYear,
+  });
+  await paymentPage.verifyOrderSuccess();
+}
+
+test("TC14: Place order - register while checkout", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const productPage = new ProductPage(page);
+  const cartPage = new CartPage(page);
+  const checkoutPage = new CheckoutPage(page);
+  const paymentPage = new PaymentPage(page);
+  const email = generateUniqueEmail();
+
+  await productPage.quickAddFirstProductToCart();
+  await cartPage.open();
+  await cartPage.verifyCartPageDisplayed();
+  await cartPage.proccedToCheckout();
+  await checkoutPage.clickRegisterLoginFromModal();
+  await loginPage.fillSignUpNameAndEmail(testUser.name, email);
+  await loginPage.fillAccountInformation(
+    testUser.title,
+    testUser.name,
+    testUser.password,
+    testUser.dob,
+  );
+  await loginPage.fillAddressInformation(
+    testUser.firstName,
+    testUser.lastName,
+    testUser.company,
+    testUser.address1,
+    testUser.address2,
+    testUser.country,
+    testUser.state,
+    testUser.city,
+    testUser.zipcode,
+    testUser.mobile,
+  );
+  await loginPage.verifyAccountCreated();
+  await loginPage.verifyLoggedIn(testUser.firstName);
+  await cartPage.open();
+  await cartPage.proccedToCheckout();
+  await checkoutPage.verifyCheckoutPage();
+  await completePaymentAndVerify(checkoutPage, paymentPage);
+  await paymentPage.continueButton();
+  await loginPage.deleteAccount();
+});
+
+test("TC15: Place Order - Register Before Checkout", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const productPage = new ProductPage(page);
+  const cartPage = new CartPage(page);
+  const checkoutPage = new CheckoutPage(page);
+  const paymentPage = new PaymentPage(page);
+  const email = generateUniqueEmail();
+
+  // Register First
+  await loginPage.open();
+  await loginPage.fillSignUpNameAndEmail(testUser.name, email);
+  await loginPage.fillAccountInformation(
+    testUser.title,
+    testUser.name,
+    testUser.password,
+    testUser.dob,
+  );
+  await loginPage.fillAddressInformation(
+    testUser.firstName,
+    testUser.lastName,
+    testUser.company,
+    testUser.address1,
+    testUser.address2,
+    testUser.country,
+    testUser.state,
+    testUser.city,
+    testUser.zipcode,
+    testUser.mobile,
+  );
+  await loginPage.verifyAccountCreated();
+  await loginPage.verifyLoggedIn(testUser.firstName);
+
+  // Add Product and checkout
+
+  await productPage.quickAddFirstProductToCart();
+  await cartPage.open();
+  await cartPage.verifyCartPageDisplayed();
+  await cartPage.proccedToCheckout();
+
+  await checkoutPage.verifyCheckoutPage();
+  await completePaymentAndVerify(checkoutPage, paymentPage);
+
+  await paymentPage.continueButton();
+  await loginPage.deleteAccount();
+});
+
+test.describe("TC16: Place order - login before checkout", () => {
+  const orderComments: string[] = [
+    `First Automated Order`,
+    "Seconf Automated Order with Different comment",
+  ];
+
+  for (const comment of orderComments) {
+    test(`Order with comment: ${comment}`, async ({ page }) => {
+      const loginPage = new LoginPage(page);
+      const productPage = new ProductPage(page);
+      const cartPage = new CartPage(page);
+      const checkoutPage = new CheckoutPage(page);
+      const paymentPage = new PaymentPage(page);
+      const email = generateUniqueEmail();
+
+      // Register First
+      await loginPage.open();
+      await loginPage.fillSignUpNameAndEmail(testUser.name, email);
+      await loginPage.fillAccountInformation(
+        testUser.title,
+        testUser.name,
+        testUser.password,
+        testUser.dob,
+      );
+      await loginPage.fillAddressInformation(
+        testUser.firstName,
+        testUser.lastName,
+        testUser.company,
+        testUser.address1,
+        testUser.address2,
+        testUser.country,
+        testUser.state,
+        testUser.city,
+        testUser.zipcode,
+        testUser.mobile,
+      );
+      await loginPage.verifyAccountCreated();
+      await loginPage.verifyLoggedIn(testUser.firstName);
+      await loginPage.logout();
+
+      // Login 
+
+      await loginPage.login(email,testUser.password);
+      await loginPage.verifyLoggedIn(testUser.firstName);
+
+      // Add Product and checkout
+      await productPage.quickAddFirstProductToCart();
+      await cartPage.open();
+      await cartPage.proccedToCheckout();
+
+      await checkoutPage.verifyCheckoutPage();
+      await checkoutPage.enterCommentAndPlaceOrder(comment);
+      await paymentPage.fillPaymentDetails({
+        cardName: payment.nameOnCard,
+        cardNumber: payment.cardNumber,
+        cvcNo: payment.cvc,
+        month: payment.expiryMonth,
+        year: payment.expiryYear,
+      });
+      await paymentPage.verifyOrderSuccess();
+
+      await paymentPage.continueButton();
+      await loginPage.deleteAccount();
+    });
+  }
+});
