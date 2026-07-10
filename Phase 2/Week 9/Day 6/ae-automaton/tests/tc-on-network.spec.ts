@@ -60,3 +60,64 @@ test("use locator found via Element tab - cart bridge", async ({ page }) => {
   expect(badgeCount).toBe("1");
 });
 
+// 3. Read Evaluate Read DOM values in a test
+
+test("page.evaluate() - read DOM values", async ({ page }) => {
+  await page.goto(`https://www.saucedemo.com`);
+  await page.getByPlaceholder("Username").fill("standard_user");
+  await page.getByPlaceholder("Password").fill("secret_sauce");
+  await page.getByRole("button", { name: "Login" }).click();
+
+  // 1. Read Page title via evaluate
+  const title = await page.evaluate(() => document.title);
+  console.log("Title:", title);
+  expect(title).toBe("Swag Labs");
+
+  // 2. Count product cards
+  const productCount = await page.evaluate(
+    () => document.querySelectorAll(".inventory_item").length,
+  );
+  console.log("Product Count:", productCount);
+  expect(productCount).toBe(6);
+
+  // 3. Get All Product Name as an array
+  const productNames = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".inventory_item_name")).map((e) =>
+      e.textContent?.trim(),
+    ),
+  );
+  console.log("Product Names:", productNames);
+  expect(productNames).toHaveLength(6);
+  expect(productNames[0]).toBe("Sauce Labs Backpack");
+
+  // 4. Read a value passed from test scope into browser scope
+  const expectedName = "Swag Labs";
+  const titleMatches = await page.evaluate(
+    (brand) => document.title.includes(brand),
+    expectedName,
+  );
+  expect(titleMatches).toBe(true);
+
+  // 5 Check Local Storage
+  const sessionItem = await page.evaluate(
+    () => Object.keys(localStorage).join(",") || "localstroage is empty",
+  );
+  console.log("localstorage keys:", sessionItem);
+});
+
+test("page.evaluate() — DOM manipulation (removing banners)", async ({
+  page,
+}) => {
+  await page.goto(`https://www.automationexercise.com`);
+
+  // Remove any element by selector
+  await page.evaluate((selector) => {
+    document.querySelector(selector)?.remove();
+  }, ".visual_failure");
+
+  // Scroll to bottom via JS
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  const scrollY = await page.evaluate(() => window.scrollY);
+  console.log("Scroll Position:", scrollY);
+  expect(scrollY).toBeGreaterThan(0);
+});
