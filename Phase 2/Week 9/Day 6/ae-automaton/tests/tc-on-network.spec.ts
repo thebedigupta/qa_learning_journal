@@ -86,6 +86,7 @@ test("page.evaluate() - read DOM values", async ({ page }) => {
       e.textContent?.trim(),
     ),
   );
+
   console.log("Product Names:", productNames);
   expect(productNames).toHaveLength(6);
   expect(productNames[0]).toBe("Sauce Labs Backpack");

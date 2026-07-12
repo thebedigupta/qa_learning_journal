@@ -62,4 +62,4 @@ __Answer :__ Not Known
 
 **Q. Which DevTools tab shows XHR/Fetch requests?**
 
-__Answer :__  
+__Answer :__  Network Tab
