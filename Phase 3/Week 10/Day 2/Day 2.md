@@ -147,3 +147,24 @@ pm.test("Body is empty", () => {
 
 ---
 
+## Step 3 — Pre-request Script for Dynamic Data
+
+On your POST request, switch to **Pre-request Script** tab:
+```javascript
+const timestamp = new Date().getTime();
+pm.environment.set("dynamicName", `User_${timestamp}`);
+pm.environment.set("dynamicJob", "QA Engineer");
+```
+
+Then update your POST body to use these:
+```json
+{
+    "name": "{{dynamicName}}",
+    "job": "{{dynamicJob}}"
+}
+```
+
+Every run now creates a unique user name automatically.
+
+---
+
