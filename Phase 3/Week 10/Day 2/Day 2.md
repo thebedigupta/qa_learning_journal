@@ -168,3 +168,18 @@ Every run now creates a unique user name automatically.
 
 ---
 
+## Step 4 — Run the Collection
+
+Click your collection → Run → select `reqres-env` → Run.
+
+All 5 requests should execute in sequence and all tests should pass green.
+
+---
+
+## Day Complete Check
+
+- 5 requests built inside one collection
+- Every request has at least 2 assertions in Tests tab
+- Environment variable `baseUrl` used in every URL (no hardcoded domain)
+- Pre-request script sets dynamic data on POST
+- Collection Runner shows all green
