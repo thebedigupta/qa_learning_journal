@@ -29,3 +29,25 @@ Now every request URL starts with `{{baseUrl}}` instead of the full domain.
 
 ---
 
+## Step 2 — The 5 CRUD Requests
+
+Build these **inside your collection**, one by one.
+
+**1. GET all users**
+```
+GET {{baseUrl}}/api/users?page=2
+```
+Tests tab:
+```javascript
+pm.test("Status is 200", () => {
+    pm.response.to.have.status(200);
+});
+pm.test("Response has data array", () => {
+    const json = pm.response.json();
+    pm.expect(json.data).to.be.an('array');
+    pm.expect(json.data.length).to.be.greaterThan(0);
+});
+```
+
+---
+
