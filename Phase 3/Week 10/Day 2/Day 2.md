@@ -51,3 +51,99 @@ pm.test("Response has data array", () => {
 
 ---
 
+**2. GET single user**
+```
+GET {{baseUrl}}/api/users/2
+```
+Tests tab:
+```javascript
+pm.test("Status is 200", () => {
+    pm.response.to.have.status(200);
+});
+pm.test("User id is 2", () => {
+    const json = pm.response.json();
+    pm.expect(json.data.id).to.equal(2);
+});
+pm.test("Email exists", () => {
+    const json = pm.response.json();
+    pm.expect(json.data.email).to.be.a('string');
+});
+```
+
+---
+
+**3. POST create user**
+```
+POST {{baseUrl}}/api/users
+```
+Body → raw → JSON:
+```json
+{
+    "name": "Bedi",
+    "job": "SDET"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 201", () => {
+    pm.response.to.have.status(201);
+});
+pm.test("Name matches", () => {
+    const json = pm.response.json();
+    pm.expect(json.name).to.equal("Bedi");
+});
+pm.test("ID is assigned", () => {
+    const json = pm.response.json();
+    pm.expect(json.id).to.exist;
+});
+
+// Save the created ID for later use
+pm.environment.set("userId", pm.response.json().id);
+```
+
+---
+
+**4. PUT update user**
+```
+PUT {{baseUrl}}/api/users/2
+```
+Body → raw → JSON:
+```json
+{
+    "name": "Bedi Updated",
+    "job": "Senior SDET"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 200", () => {
+    pm.response.to.have.status(200);
+});
+pm.test("Job is updated", () => {
+    const json = pm.response.json();
+    pm.expect(json.job).to.equal("Senior SDET");
+});
+pm.test("updatedAt exists", () => {
+    const json = pm.response.json();
+    pm.expect(json.updatedAt).to.exist;
+});
+```
+
+---
+
+**5. DELETE user**
+```
+DELETE {{baseUrl}}/api/users/2
+```
+Tests tab:
+```javascript
+pm.test("Status is 204", () => {
+    pm.response.to.have.status(204);
+});
+pm.test("Body is empty", () => {
+    pm.expect(pm.response.text()).to.be.empty;
+});
+```
+
+---
+
