@@ -19,3 +19,71 @@ DELETE {{baseUrl}}/api/users/{{userId}}
 
 Now when POST runs first and saves the ID, every subsequent request uses it automatically. This is how real test suites chain dependent calls.
 
+---
+
+## Part 2 — Negative Test Cases (45 min)
+
+Add these 3 new requests to your collection under a folder called `negative-tests`.
+
+**GET non-existent user**
+```
+GET {{baseUrl}}/api/users/999
+```
+Tests tab:
+```javascript
+pm.test("Status is 404", () => {
+    pm.response.to.have.status(404);
+});
+pm.test("Body is empty object", () => {
+    const json = pm.response.json();
+    pm.expect(json).to.deep.equal({});
+});
+```
+
+---
+
+**POST register — missing password**
+```
+POST {{baseUrl}}/api/register
+```
+Body:
+```json
+{
+    "email": "sydney@fife"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 400", () => {
+    pm.response.to.have.status(400);
+});
+pm.test("Error message exists", () => {
+    const json = pm.response.json();
+    pm.expect(json.error).to.be.a('string');
+});
+```
+
+---
+
+**POST login — missing password**
+```
+POST {{baseUrl}}/api/login
+```
+Body:
+```json
+{
+    "email": "peter@klaven"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 400", () => {
+    pm.response.to.have.status(400);
+});
+pm.test("Returns error key", () => {
+    const json = pm.response.json();
+    pm.expect(json).to.have.property('error');
+});
+```
+
+---
