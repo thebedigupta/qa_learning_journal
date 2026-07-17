@@ -199,3 +199,58 @@ Switch between environments in the top-right dropdown and re-run — the same co
 
 ---
 
+## Part 4 — Successful Auth Requests (30 min)
+
+Add these under a folder called `auth-tests`.
+
+**POST register — success**
+```
+POST {{baseUrl}}/api/register
+```
+Body:
+```json
+{
+    "email": "eve.holt@reqres.in",
+    "password": "pistol"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 200", () => {
+    pm.response.to.have.status(200);
+});
+pm.test("Token is returned", () => {
+    const json = pm.response.json();
+    pm.expect(json.token).to.be.a('string');
+});
+
+// Save token for next request
+pm.environment.set("authToken", pm.response.json().token);
+```
+
+---
+
+**POST login — success**
+```
+POST {{baseUrl}}/api/login
+```
+Body:
+```json
+{
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+}
+```
+Tests tab:
+```javascript
+pm.test("Status is 200", () => {
+    pm.response.to.have.status(200);
+});
+pm.test("Token saved matches", () => {
+    const json = pm.response.json();
+    pm.expect(json.token).to.equal(pm.environment.get("authToken"));
+});
+```
+
+---
+
