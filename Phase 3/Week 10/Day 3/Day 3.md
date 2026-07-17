@@ -177,3 +177,25 @@ pm.test("Returns error key", () => {
 
 ---
 
+## Part 3 — Multiple Environments (30 min)
+
+Yesterday you only had `reqres-env`. Now create a second to simulate having dev/staging setups — a real-world pattern.
+
+Environments → Add → `reqres-staging`
+
+| Variable | Value |
+|----------|-------|
+| `baseUrl` | `https://reqres.in` |
+| `env` | `staging` |
+
+Add this test to your GET all users request:
+```javascript
+pm.test("Correct environment loaded", () => {
+    pm.expect(pm.environment.get("env")).to.exist;
+});
+```
+
+Switch between environments in the top-right dropdown and re-run — the same collection works across both. This is the point: one collection, many environments.
+
+---
+
