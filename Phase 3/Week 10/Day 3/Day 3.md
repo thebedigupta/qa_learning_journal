@@ -254,3 +254,26 @@ pm.test("Token saved matches", () => {
 
 ---
 
+## Part 5 — Run the Full Collection (15 min)
+
+Collection → Run collection → select `reqres-env` → Run.
+
+You should see something like: **12 requests, 20+ assertions, all green**.
+
+If anything fails, read the test name — it'll tell you exactly which assertion broke.
+
+---
+
+## Export for Tomorrow (10 min)
+
+Newman (Day 65) needs these as files. Export now so you're ready.
+
+**Export collection:**
+Collection → three dots → Export → Collection v2.1 → save as `reqres-collection.json`
+
+**Export environment:**
+Environments → three dots next to `reqres-env` → Export → save as `reqres-env.json`
+
+Put both files in a folder called `postman/` inside your `qa-learning-journal` repo and commit them.
+
+---
